@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header id="header">
+        <span class="branding">
+            <img id="header-img" src="./logo.svg">
+            <h1>challengerCodeCamp</h1>
+        </span>
+
+        <nav id="nav-bar">
+            <!-- TODO - add links to the sections in the page -->
+            <!-- TODO - make this fixed to the top of the viewport -->
+            <ul>
+                <li>
+                    <a class="nav-link" href="#introduction">Intro</a>
+                </li>
+                <div class="separator">•</div>
+                <li>
+                    <a class="nav-link" href="#packages">Camps</a>
+                </li>
+                <div class="separator">•</div>
+                <li>
+                    <a class="nav-link" href="#sign-up">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- TODO add product video with id="video" -->
+
+
+        <section id="introduction" class="offset-anchor">
+            <h2>About challengerCodeCamp</h2>
+            <p>Thank you for your interest in the challengerCodeCamp!</p>
+            <p>We offer different camps to empower you in your programming journey.</p>
+            <p>We have three in-person code camps available: C++, HTML and CSS, and Java.</p>
+            <iframe width="355" height="200" id="video" src="https://www.youtube.com/embed/oFkDldu3C_4" title="Dynamic Programming with Java – Learn to Solve Algorithmic Problems &amp; Coding Challenges" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        </section>
+
+        <section id="packages" class="offset-anchor">
+            <!-- TODO add image for each camp -->
+
+            <div class="camp">
+
+
+                <h2>C++ Code Camp</h2>
+                <p>The C++ Code Camp will teach you how to create your own fully-functional segfaults.</p>
+            </div>
+
+            <div class="camp">
+
+                <h2>HTML & CSS Code Camp</h2>
+                <p>The HTML & CSS Code Camp will teach you the basics of markup and prepare you to enjoy SASS.</p>
+            </div>
+
+            <div class="camp">
+                <h2>Java</h2>
+                <p>The Java Code Camp will teach you just enough to be dangerous with the world's most-used (and
+                    disliked) language.</p>
+            </div>
+
+        </section>
+
+        <section id="sign-up" class="offset-anchor">
+            <h2>Sign Up</h2>
+            <p>Choose the camps you are interested in and provide your email for us to begin!</p>
+
+            <form id="form" action="https://www.freecodecamp.com/email-submit">
+                <label for="c++camp">
+                    <input type="checkbox" id="c++camp">C++
+                </label>
+                <label for="htmlcss">
+                    <input type="checkbox" name="htmlcss" id="htmlcss">HTML & CSS
+                </label>
+                <label for="java">
+                    <input type="checkbox" name="java" id="java">Java
+                </label>
+                
+                <label for="email">
+                E-mail
+                <input type="email" id="email" name="email" placeholder="Email">
+                </label>
+                <input type="submit" value="Submit" id="submit">
+            </form>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+/* TODO - add one media query */
+
+:root {
+    --background-color: #FFFFEB;
+    --primary-font-color: #1F1E1F;
+    --header-bg-color: #ff9100a9;
+    --border-color: #636363;
+    --border-radius: 3px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+@media screen and (min-width: 500px) {
+    main {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: var(--primary-font-color);
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+#header-img {
+    width: 4rem;
+}
+
+#header {
+    padding: 1em;
+    background-color: var(--header-bg-color);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.5);
+    padding-bottom: .5em;
+    margin-bottom: 1em;
+}
+
+nav a {
+    font-size: 2em;
+    padding: .5em;
+}
+
+#packages {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1em;
+}
+
+.camp {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+    background-color: var(--border-color);
+    /* box-shadow: 0 1em .5em .5em black; */
+}
+
+.camp h2 {
+    width: 100%;
+    background-color: var(--border-color);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border: none;
+    color: black;
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offset-anchor {
+    padding-top: 8rem;
+    margin-top: -8rem;
+}
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+.separator {
+    font-size: 2rem;
+}
+
+section {
+    margin: 1em auto;
+    padding: 1em;
+}
+
+p {
+    font-size: 2em;
+    margin-bottom: 1em;
+    
+}
+
+label {
+    display: flex;
+    gap: .5rem;
+    font-size: 2rem;
+    width: 50;
+}
+
+input[type="submit"] {
+    
+    font-size: 1.5rem;
+}
+
+.camp p {
+    background-color: var(--background-color);
+    width: 100%;
+    padding-bottom: 2rem;
+    margin-bottom: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 2.25rem;
+}

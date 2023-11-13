@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Survey</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <div class="content">
+    <h1 id="title">Cat Survey</h1>
+    
+
+    <p id="description">Welcome to the survey! We invite your feedback regarding the cats in your household.</p>
+
+    <form id="survey-form" action="post">
+      <fieldset>
+      <label for="name" id="name-label">Name<input class="form-elements" id="name" type="text" required placeholder="Enter your name"></label>
+
+      <label for="email" id="email-label">Email<input class="form-elements" required id="email" type="email" placeholder="Enter your email"></label>
+      
+      </fieldset>
+      <fieldset>
+      <label for="number" id="number-label">How many cats do you have in your home?<input type="number" id="number" min="0" max="99" placeholder="Enter the number of cats" class="form-elements">
+      </fieldset>
+      <fieldset>
+      <label for="dropdown">
+        What is your craziest cat's personality?
+        <select id="dropdown">
+          <option>(select an option)</option>
+          <option>Psychotic</option>
+          <option>Eternally Hungry</option>
+          <option>Forever Playful</option>
+        </select>
+      </label>
+      </fieldset>
+      <fieldset>
+      Do you think you'll get more cats?
+      <label for="yes"><input type="radio" name="more-cats" id="yes" value="yes">Yes</label>
+      <label for="no"><input type="radio" name="more-cats" id="no" value="no">No</label>
+      </fieldset>
+      <fieldset>
+      What patterns of cats do you have?
+      <label for="long-fur"><input id="long-fur" type="checkbox" value="long-fur"> Long fur</label>
+      <label for="crimped-fur"><input id="crimped-fur" type="checkbox" value="crimped-fur"> Crimped fur</label>
+      <label for="short-fur"><input id="short-fur" type="checkbox" value="short-fur"> Short fur</label>
+      <label for="hairless"><input id="hairless" type="checkbox" value="hairless"> Hairless</label>
+      <label for="solid-coat"><input id="solid-coat" type="checkbox" value="solid-coat"> Solid coat</label>
+      <label for="bicolor-coat"><input id="bicolor-coat" type="checkbox" value="bicolor-coat"> Bi-color coat</label>
+      <label for="tabby-coat"><input id="tabby-coat" type="checkbox" value="tabby-coat"> Tabby coat</label>
+      <label for="tricolor-coat"><input id="tricoloar-coat" type="checkbox" value="tricolor-coat"> Tricolor coat</label>
+      <label for="tortoiseshell-coat"><input id="tortoiseshell-coat" type="checkbox" value="tortoiseshell-coat"> Tortoiseshell coat</label>
+      <label for="torbie-coat"><input id="torbie-coat" type="checkbox" value="torbie-coat"> Torbie coat</label>
+      <label for="colorpoint-coat"><input id="colorpoint-coat" type="checkbox" value="colorpoint-coat"> Colorpoint coat</label>
+
+      </fieldset>
+
+    <fieldset>
+      Do you have any additional comments you'd like to provide?
+      <textarea rows=3 cols=40></textarea>
+      </fieldset>
+
+      <input id="submit" type="submit" value="Submit Cat Survey">
+
+    </form>
+</div>
+
+  </body>
+  
+  </html>
