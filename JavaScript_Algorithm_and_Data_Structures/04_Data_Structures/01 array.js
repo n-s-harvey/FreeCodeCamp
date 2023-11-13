@@ -1,0 +1,6 @@
+/**
+ * * .length
+ * * .slice()
+ * * .splice()
+ * * .indexOf()
+ */

@@ -1,0 +1,34 @@
+base case: first guess
+
+for all the words in the available words
+    find all the words with the matching letter
+    find the largest set of words that share a letter's position
+    update the user's current word to hold the position(s) of the letters
+
+// How do we find the largest set of words that share a letter's position?
+1. find all the words with that letter
+2. for each word with at least one matching letter
+    add it to an array
+    -> thinking of using a regex to find matches
+        if there is a match, add the string to the array of working words
+3. for every word in the array:
+    find the index of where the letter is located
+        (one option): iterate through each word... boring
+            for each letter in each word
+                count the number of letter matches and their index
+                    maybe a map? Number of occurrences is the key, array of matching positions is the value
+        (second option): create a variable regex
+            - downside: would need to iterate through every potential location
+                -> however, we know the exact length
+            - downside: would find words with only single-letter matches and not multiple
+            - 
+        (third option): every word in the array becomes an object:
+            property: string (the actual word)
+            count: the number of times a specific letter occurs (provided in constructor)
+                turns out this is basically pointless lol
+            array: lists the index locations of each occurences
+                - downside: will need to compare the array of each word
+                Keep track of which index has the most frequent occurence
+            
+New paradigm: each word is an object
+    Properties: 
