@@ -66,3 +66,46 @@ The `i` element is commonly used for icons; the `span` element can be used as we
 Usage:  
 `<i class="fas [class]"></i>`
 
+## 14. Add Font Awesome Icons to all of the Buttons
+
+There are additional Font Awesome Icons - `fa-info-circle` and `fa-trash`.
+
+## 15. Responsively Style Radio Buttons
+
+Bootstrap's grid classes can be used on form elements as well.
+
+Wrap the items in a `div` with a class of `row` to place items in a responsive grid.
+
+## 16. Responsively Style Checkboxes
+
+## 17. Style Text Inputs as Form Controls
+
+Add the `form-control` class to use Bootstrap sizing and styles for form elements.
+
+## 18. Line up Form Elements Responsively with Bootstrap
+
+## 19. Create a Bootstrap Headline
+
+## 20. 
+
+## 21. 
+
+## 22. 
+
+## 23. Create Bootstrap Wells
+
+Bootstrap's class called `well` creates visual depth.
+
+## 24. Apply the Default Bootstrap Button Style
+
+## 25. Create a Class to Target with jQuery Selectors
+
+## 26. Add id Attributes to Bootstrap Elements
+
+## 27. Label Bootstrap Wells
+
+## 28. Give Each Element a Unique ID
+
+## 29. Label Bootstrap Buttons
+
+## 30. Use Comments to Clarify Code
