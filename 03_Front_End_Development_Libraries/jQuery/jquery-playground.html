@@ -1,0 +1,43 @@
+<head><base href="">
+  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css" rel="stylesheet"><script>"use strict";
+
+$(document).ready(function () {
+  $("#target1").css("color", "red");
+  $("#target1").prop("disabled", true);
+  $("#target4").remove();
+  $("#target2").appendTo("#right-well");
+  $("#target5").clone().appendTo("#left-well");
+  $("#target1").parent().css("background-color", "red");
+  $("#right-well").children().css("color", "orange");
+  $("#left-well").children().css("color", "green");
+  $(".target:nth-child(2)").addClass("animated bounce");
+  $(".target:even").addClass("animated shake");
+  $("body").addClass("animated hinge");
+});</script></head>
+
+<!-- Only change code above this line -->
+
+<body class="animated hinge"><div class="container-fluid">
+  <h3 class="text-primary text-center">jQuery Playground</h3>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>#left-well</h4>
+      <div class="well" id="left-well" style="background-color: red;">
+        <button class="btn btn-default target animated shake" id="target1" style="color: green;" disabled="">#target1</button>
+        
+        <button class="btn btn-default target animated bounce" id="target3" style="color: green;">#target3</button>
+      <button class="btn btn-default target animated shake" id="target5" style="color: green;">#target5</button></div>
+    </div>
+    <div class="col-xs-6">
+      <h4>#right-well</h4>
+      <div class="well" id="right-well">
+        
+        <button class="btn btn-default target" id="target5" style="color: orange;">#target5</button>
+        <button class="btn btn-default target animated bounce shake" id="target6" style="color: orange;">#target6</button>
+      <button class="btn btn-default target" id="target2" style="color: orange;">#target2</button></div>
+    </div>
+  </div>
+</div></body>
