@@ -71,7 +71,7 @@ div {
 Sass allows you to create a mixin, which acts like a function:
 
 ``````scss
-@mixin box-shadow($x, $y, $blur, $c){ 
+@mixin box-shadow($x, $y, $blur, $c) { 
   -webkit-box-shadow: $x $y $blur $c;
   -moz-box-shadow: $x $y $blur $c;
   -ms-box-shadow: $x $y $blur $c;
@@ -189,7 +189,11 @@ $x: 1;
 
 Names for partials start with a `_` and the file extension is `.scss`.
 
-To import the styles from "_modules.scss", use `@import 'modules'`. The underscore and file extension are not needed in the `@import` directive.
+To import the styles from "_modules.scss", use 
+``````scss
+@import 'modules'
+``````
+The underscore and file extension are not needed in the `@import` directive.
 
 ## Extend One Set of CSS Styles to Another Element
 
