@@ -101,3 +101,112 @@ Note how there are no parenthese wrapped around the test expression.
 
 And just like other languages, Sass supports `if`/`else if`/`else` statements.
 
+## Use @for to Create a Sass Loop
+
+`@for` is used in two ways: "start through end" or "start to end." Start to end excludes the second number in the range, and start through end includes the second.
+
+Start through end example:
+
+``````scss
+@for $i from 1 through 12 {
+  .col-#{$i} { width: 100%/12 * $i; }
+}
+
+``````
+The `#{$i}` is the syntax to combine a variable with text to make a string.
+
+When the Sass file is compiled to CSS, the above code will have this output:
+
+``````css
+.col-1 {
+  width: 8.33333%;
+}
+
+.col-2 {
+  width: 16.66667%;
+}
+
+...
+
+.col-12 {
+  width: 100%;
+}
+``````
+
+## Use @each to Map Over Items in a List
+
+The syntax between iterating over a list and a map is different.
+
+Iterating over a list:
+
+``````scss
+@each $color in blue, red, green {
+  .#{$color}-text {color: $color;}
+}
+``````
+
+Iterating over a map:
+
+``````scss
+$colors: (color1: blue, color2: red, color3: green);
+
+@each $key, $color in $colors {
+  .#{$color}-text {color: $color;}
+}
+``````
+
+Both of the previous snippets are converted into this CSS:
+
+``````css
+.blue-text {
+  color: blue;
+}
+
+.red-text {
+  color: red;
+}
+
+.green-text {
+  color: green;
+}
+``````
+
+## Apply a Style Until a Condition is Met with @while
+
+The `@while` loop is another way to write a loop that will compile into CSS.
+
+``````scss
+$x: 1;
+@while $x < 13 {
+  .col-#{$x} { width: 100%/12 * $x;}
+  $x: $x + 1;
+}
+``````
+
+## Split Styles into Smaller Chunks with Partials
+
+*Partials* are separate files that hold segments of CSS code.
+
+Names for partials start with a `_` and the file extension is `.scss`.
+
+To import the styles from "_modules.scss", use `@import 'modules'`. The underscore and file extension are not needed in the `@import` directive.
+
+## Extend One Set of CSS Styles to Another Element
+
+The `@extend` directive allows you to reuse the rules written for one element, then add more for another element.
+
+``````scss
+.red {
+  background-color: red;
+  width: 100px;
+}
+``````
+
+Then we can use `extend`:
+
+``````scss
+.taller-red {
+  @extend .red;
+  height: 1000px;
+}
+``````
