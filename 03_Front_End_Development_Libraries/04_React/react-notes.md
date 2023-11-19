@@ -344,3 +344,27 @@ class Calendar extends React.Component {
   }
 };
 ```
+
+## Pass an Array as Props
+
+To pass an array to a JSX element, it must be treated as JavaScript and wrapped in curly braces.
+
+```jsx
+<ParentComponent>
+  <ChildComponent colors={["green", "blue", "red"]} />
+</ParentComponent>
+```
+
+Array methods such as `join()` can be used when accessing the property:
+
+```jsx
+const ChildComponent = (props) => <p>{props.colors.join(', ')}</p>
+```
+
+## Use Default Props
+
+Syntax:
+
+```jsx
+ComponentName.defaultProps = { property-name: value };
+```
