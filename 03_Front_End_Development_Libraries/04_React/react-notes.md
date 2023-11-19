@@ -368,3 +368,69 @@ Syntax:
 ```jsx
 ComponentName.defaultProps = { property-name: value };
 ```
+
+## Override Default Props
+
+To override default props, explicitly set the prop values.
+
+To pass in non-string values as a prop, it needs to be executed as JavaScript by wrapping in `{ }`
+
+```jsx
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+}
+
+Items.defaultProps = {
+  quantity: 0
+}
+
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <Items quantity={10} />
+  }
+};
+```
+
+## Use PropTypes to Define the Props You Expect
+
+It's best practice to define the type when you know it ahead of time. React will throw an error if the type doesn't match the expected type.
+
+Usage:
+
+```jsx
+MyComponent.propTypes = { handleClick: PropTypes.func.isRequired }
+```
+
+In the above snippet, `PropTypes.func` checks that `handleClick` is a function. Adding `isRequired` tells React that `handleClick` is a required property for that component.
+
+`func` is one of the primitive JavaScript types.
+
+As of React v15.5.0, `PropTypes` is imported independently from React:
+
+```jsx
+import PropTypes from 'prop-types';
+```
+
+```jsx
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+};
+
+Items.propTypes = {quantity: PropTypes.number.isRequired}
+
+Items.defaultProps = {
+  quantity: 0
+};
+
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <Items />
+  }
+};
+```
