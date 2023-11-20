@@ -434,3 +434,147 @@ class ShoppingCart extends React.Component {
   }
 };
 ```
+
+## Access Props Using `this.props`
+
+If the component that you're passing a prop to is an ES6 class component, use the `this` keyword:
+
+```jsx
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+        <div>
+            <Welcome name="Nick"/>
+        </div>
+    );
+  }
+};
+
+class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+        <div>
+          <p>Hello, <strong>{ this.props.name }</strong>!</p>
+        </div>
+    );
+  }
+};
+```
+
+## Summary of Stateless Functional Components, Stateless Components, and Stateful Components
+
+- **Stateless functional component**: any function which accepts props and returns JSX
+- **Stateless component**: a class that extends `React.component` but does not use internal state
+- **Stateful component**: a class component that maintains its own internal state
+
+It is best to minimize statefulness and to create stateless functional components whever possible to reduce the number of areas which are affected by state.
+
+Note that `.defaultProps` and `.propTypes` are still available to use with a functional component:
+
+
+```jsx
+class CampSite extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Camper />
+      </div>
+    );
+  }
+};
+
+const Camper = (props) => {
+  return (
+    <>
+    <p>My name is</p>
+    <p>{props.name}</p>
+    </>
+  );
+}
+
+Camper.defaultProps = {name: 'CamperBot'};
+
+Camper.propTypes = {name: PropTypes.string.isRequired};
+```
+
+## Create a Stateful Component
+
+The `state` consists of any data your app needs to know about.
+
+To create a state in a React component, declare a `state` property on the component class in its constructor. The `state` property must be set to a JavaScript object.
+
+The `state` object is persistent throughout life of the component.
+
+To use `state`, it is required to extend `React.Component`.
+
+```jsx
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "Nick"
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.firstName}</h1>
+      </div>
+    );
+  }
+};
+```
+
+## Render State in the User Interface
+
+If a component is stateful, it will always have access to the data in `state` in its `render()` method with `this.state`.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+```
+
+## Another Way to Render State in the User Interface
+
+In the `render()` method, before the `return` statement, you can write JavaScript and then use `props` and/or `state` in the return value.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+    const name = this.state.name;
+    return (
+      <div>
+        <h1>{name}</h1>
+      </div>
+    );
+  }
+};
+```
