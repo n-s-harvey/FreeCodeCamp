@@ -578,3 +578,63 @@ class MyComponent extends React.Component {
   }
 };
 ```
+
+## Set State with `this.setState()`
+
+To use `.setState()`, pass in an object with key-value pairs.
+
+Avoid modifying  state directly and instead use `setState()`
+
+State updates through `setState()` may be asynchronous, and React may run multiple updates at once to improve performance
+
+``````jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(
+      {name: "React Rocks!"}
+    );
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+``````
+
+## Bind `this` to a Class Method
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "Hello"
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      text: "You clicked!"
+    });
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.text}</h1>
+      </div>
+    );
+  }
+};
+```
