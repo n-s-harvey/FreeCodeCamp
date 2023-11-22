@@ -614,6 +614,8 @@ class MyComponent extends React.Component {
 
 ## Bind `this` to a Class Method
 
+A class method typically needs access to the `this` keyword, so it is useful to bind `this` in the constructor for the methods that need access
+
 ```jsx
 class MyComponent extends React.Component {
   constructor(props) {
@@ -634,6 +636,210 @@ class MyComponent extends React.Component {
         <button onClick={this.handleClick}>Click Me</button>
         <h1>{this.state.text}</h1>
       </div>
+    );
+  }
+};
+```
+
+## Use State to Toggle an Element
+
+Remember that React may batch multiple `setState()` calls into a single update. So, we should avoid using code like this:
+
+```jsx
+{/* Don't do this! */}
+
+this.setState({
+  counter: this.state.counter + this.props.increment
+});
+```
+
+Instead, pass `setState` a function that allows you to access state and props.
+
+```jsx
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+    this.toggleVisibility = this.toggleVisibility.bind(this);
+  }
+  toggleVisibility() {
+    this.setState(state => ({visibility: !state.visibility}))
+  }
+  render() {
+    if (this.state.visibility) {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+          <h1>Now you see me!</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+        </div>
+      );
+    }
+  }
+}
+```
+
+## Write a Simple Counter
+
+```jsx
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+  increment() {
+    this.setState(
+      state => ({ count: state.count + 1 })
+    );
+  }
+  decrement() {
+    this.setState(
+      state => ({ count: state.count - 1 })
+    );
+  }
+  reset() {
+    this.setState(
+      state => ({ count: 0 })
+    );
+  }
+  render() {
+    return (
+      <div>
+        <button className='inc' onClick={this.increment}>Increment!</button>
+        <button className='dec' onClick={this.decrement}>Decrement!</button>
+        <button className='reset' onClick={this.reset}>Reset</button>
+        <h1>Current Count: {this.state.count}</h1>
+      </div>
+    );
+  }
+};
+```
+
+## Create a Controlled Input
+
+Form control elements for text input, like `input` and `textarea`, maintain their own state in the DOM. 
+
+However, this can be moved to a mutable state into a React component's `state`. This allows React to control the value of that input field.
+
+```jsx
+class ControlledInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState(
+      state => ({input: event.target.value})
+    )
+  }
+  render() {
+    return (
+      <div>
+        <input value={this.state.input} onChange={this.handleChange}/>
+        <h4>Controlled Input:</h4>
+        <p>{this.state.input}</p>
+      </div>
+    );
+  }
+};
+```
+
+## Create a Controlled Form
+
+```jsx
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  handleSubmit(event) {
+    // event.preventDefault() is to stop default form behavior -
+    // which is to refresh the page
+    event.preventDefault();
+    this.setState(state => (
+      {submit: state.input}
+    ))
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input value={this.state.input} onChange={this.handleChange} />
+          <button type='submit'>Submit!</button>
+        </form>
+        <h1>{this.state.submit}</h1>
+      </div>
+    );
+  }
+}
+```
+
+## Pass State as Props to Child Components
+
+A common pattern is to have a stateful component containing a `state` that then renders child components, which you may want to have access to some pieces of `state` passed as props.
+
+The idea of passing part of `state` as a prop shows some important paradigms in React:
+
+1. *Unidirectional data flow* - state flows in one direction down the tree of components
+2. Complex stateful apps can be decomposed into few stateful components. This allows you to separate logic handling state from the UI rendering.
+
+```jsx
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'CamperBot'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name={this.state.name} />
+       </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+    <div>
+      <h1>Hello, my name is: {this.props.name}</h1>
+    </div>
     );
   }
 };
