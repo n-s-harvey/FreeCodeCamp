@@ -3,13 +3,21 @@ https://www.freecodecamp.org/learn/front-end-development-libraries/
 
 ## Table of Contents
 
-[Getting Started with Sass](#getting-started)
+[Getting Started with Sass](#getting-started-with-sass)  
+[Using Sass Variables](#store-data-with-sass-variables)  
+[Nest CSS with Sass](#nest-css-with-sass)  
+[Using Mixins](#create-reusable-css-with-mixins)  
+[Using `@if` and `@else`](#use-if-and-else-to-add-logic)  
+[Using `@for` to loop](#use-for-to-create-a-sass-loop)  
+[Using `@each` to map](#use-each-to-map-over-items-in-a-list)  
+[Using @while to loop](#apply-a-style-until-a-condition-is-met-with-while)  
+[Using partials](#split-styles-into-smaller-chunks-with-partials)  
+[Extending styles to another element](#extend-one-set-of-css-styles-to-another-element)
 
-
-## Getting Started with Sass {#getting-started}
+## Getting Started with Sass 
 For Sass that is in an HTML document, use `<style type='text/scss'></style>`
 
-## Store Data with Sass Variables {#variables}
+## Store Data with Sass Variables
 
 In Sass, variables start with a `$` followed by the variable name.
 
@@ -25,7 +33,7 @@ selector {
 }
 ```
 
-## Nest CSS with Sass {#nesting-css}
+## Nest CSS with Sass 
 
 Normally, each element is targeted on a different line to style it:
 ``````css
@@ -58,7 +66,7 @@ article {
 }
 ``````
 
-## Create Reusable CSS with Mixins
+## Create Reusable CSS with Mixins 
 
 A *mixin* is a group of CSS that can be reused throughout the stylesheet.
 
