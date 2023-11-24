@@ -1,10 +1,15 @@
 # SASS Notes - from FreeCodeCamp
 https://www.freecodecamp.org/learn/front-end-development-libraries/
 
-## Getting Started with Sass
+## Table of Contents
+
+[Getting Started with Sass](#getting-started)
+
+
+## Getting Started with Sass {#getting-started}
 For Sass that is in an HTML document, use `<style type='text/scss'></style>`
 
-## Store Data with Sass Variables
+## Store Data with Sass Variables {#variables}
 
 In Sass, variables start with a `$` followed by the variable name.
 
@@ -20,7 +25,7 @@ selector {
 }
 ```
 
-## Nest CSS with Sass
+## Nest CSS with Sass {#nesting-css}
 
 Normally, each element is targeted on a different line to style it:
 ``````css
