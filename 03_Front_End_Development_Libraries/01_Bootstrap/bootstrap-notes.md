@@ -1,6 +1,14 @@
 # Bootstrap Notes - from FreeCodeCamp
 https://www.freecodecamp.org/learn/front-end-development-libraries/
 
+## Table of Contents
+[Including Bootstrap in your Project](#responsive-design-with-bootstrap-fluid-containers)  
+[Making Images Responsive](#make-images-mobile-responsive)  
+[Centering Text](#center-text-with-bootstrap)  
+[Buttons](#bootstrap-buttons)  
+[Bootstrap Grid](#use-the-bootstrap-grid-to-put-elements-side-by-side)  
+[FontAwesome Icons](#add-font-awesome-icons-to-buttons)  
+
 ## Responsive Design with Bootstrap Fluid Containers
 
 Add this link to any app by adding this to the top of your HTML:  

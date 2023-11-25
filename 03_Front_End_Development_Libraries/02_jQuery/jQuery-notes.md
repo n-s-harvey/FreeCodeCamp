@@ -1,6 +1,31 @@
 # jQuery Notes - from FreeCodeCamp
 https://www.freecodecamp.org/learn/front-end-development-libraries/
 
+## Table of Contents
+[Getting Started](#getting-started-with-jquery)  
+
+### Targeting
+
+[Target the Parent of an Element](#target-the-parent-of-an-element-with-jquery)  
+[Target the Children of an Element](#target-the-children-of-an-element-using-jquery)  
+[Target a Specific Child](#target-a-specific-child-of-an-element-using-jquery)  
+[Targeting Even/Odd Elements](#target-even-elements-using-jquery)  
+[Targeting HTML Elements](#targeting-html-elements-with-selectors-using-jquery)  
+[Targeting by Class](#targeting-element-by-class-using-jquery)  
+[Targeting by ID](#target-elements-by-id-using-jquery)  
+[Using Multiple Selectors](#target-the-same-element-with-multiple-jquery-selectors)  
+
+### Modifying Elements
+
+[Remove Classes from an Element](#remove-classes-from-an-element-with-jquery)  
+[Change CSS](#change-the-css-of-an-element-using-jquery)  
+[Disabling Elements](#disable-an-element-using-jquery)  
+[Changing Text](#change-text-inside-an-element-using-jquery)  
+[Removing Elements](#remove-an-element-using-jquery)  
+[Move Elements](#move-elements-with-jquery)  
+[Copy Elements](#copy-elements-with-jquery)  
+[Modifying the Entire Page](#use-jquery-to-modify-the-entire-page)  
+
 ## Getting Started with jQuery
 
 Add a `script` element at the top of the page
