@@ -12,7 +12,9 @@ https://www.freecodecamp.org/learn/front-end-development-libraries/
 ## Responsive Design with Bootstrap Fluid Containers
 
 Add this link to any app by adding this to the top of your HTML:  
+```htm
 `<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>`
+```
 
 Nest all of the HTML within a `div` with the class `container-fluid`.
 
@@ -28,13 +30,15 @@ Add the class `text-center` to center text.
 
 Apply the `btn` class to a `button` element. The default class is `btn-default`.
 
-Apply the `btn-block` class to make a button a block element. **This still requires the `btn` class.**
+These additional button styles **require the `btn` class as well**:
 
-Add the `btn-primary` class for the main color of your app. **This still requires the `btn` class.**
+- Apply the `btn-block` class to make a button a block element. 
 
-Add the `btn-info` class for optional actions. **This still requires the `btn` class.**
+- Add the `btn-primary` class for the main color of your app. 
 
-Add the `btn-danger` class for optional actions. **This still requires the `btn` class.**
+- Add the `btn-info` class for optional actions. 
+
+- Add the `btn-danger` class for optional actions. 
 
 ## Use the Bootstrap Grid to Put Elements Side by Side
 
@@ -55,7 +59,9 @@ Add the `form-control` class to use Bootstrap sizing and styles for form element
 Font Awesome icons are webfonts or vector graphics.
 
 To include, add this code to the top of your HTML:  
+```htm
 `<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">`
+```
 
 The `i` element is commonly used for icons; the `span` element can be used as well.
 
