@@ -48,86 +48,77 @@ class Currencies {
   ]);
 }
 
-class Denomination {
-  #_value;
-  name;
-  constructor(name) {
-    /**
-     * @type {String}
-     */
-    this.name = name;
-    /**
-    * @type {Number}
-    */
-    this.value = Currencies.values.get(name);
 
-  }
-  get value() {
-    return this.#_value;
-  }
-  set value(amount) {
-    this.#_value = amount;
-  }
-}
-
-class Drawer {
+// TODO write remove() function
+class CashCollection {
   /**
-   * @type {{currency: Denomination, amount: number}[]}
+   * @type {{currency: string, amount: number, value: number}[]}
    */
   #cash = [];
   /**
+   * @type {Object.<string, {amount: number, value: number}>}
+   */
+  #cashmap = new Map();
+  /**
    * @param {Array<Array>} cid 
    */
+  // constructor(cid) {
+  //   this.#cash = cid.map(
+  //     element => {
+  //       let name = element[0];
+  //       let amount = element[1];
+  //       return {
+  //         currency: name,
+  //         amount: amount,
+  //         value: Currencies.values.get(name)
+  //       }
+  //     }
+  //   )
+  // }
+
   constructor(cid) {
-    this.#cash = cid.map(
+    cid.forEach(
       element => {
         let name = element[0];
         let amount = element[1];
-        return {
-          currency: new Denomination(name),
-          amount: amount
-        }
+        this.#cashmap.set(
+          name, { amount: amount, value: Currencies.values.get(name) }
+        )
       }
     )
   }
   getBalance(currencyName) {
-    for (const element of this.#cash) {
-      if (element.currency.name == currencyName) return element.amount;
-    }
-    return undefined;
+    return this.#cashmap.get(currencyName).amount;
   }
   /**
    * @param {string} currencyName 
    * @param {number} amount 
    */
-  addToBalance(currencyName, amount) {
-    for (const element of this.#cash) {
-      if (element.currency.name == currencyName) {
-        element.amount += amount;
-      }
-    }
+  add(currencyName, amount) {
+    this.#cashmap.get(currencyName).amount += amount;
+  }
+  deduct(currencyName, amount) {
+    this.#cashmap.get(currencyName).amount -= amount;
   }
 }
-
-let penny = new Denomination("PENNY");
-console.log(penny.value);
 function checkCashRegister(price, cash, cid) {
   let change;
   let balance = price;
-  let drawer = new Drawer(cid);
+  let drawer = new CashCollection(cid);
 
   while (balance > 0) {
-
+    reduceBalance()
   }
 
   /**
-   * @param {number} amount 
-   * @param {Drawer} drawer 
+   * @param {number} balance 
+   * @param {CashCollection} drawer 
    */
-  function reduceBalance(amount, drawer) {
+  // TODO revisit this logic
+  function reduceBalance(balance, drawer) {
     for (const currency of Currencies.values) {
       if (drawer.getBalance(currency) > 0) {
-        drawer.addToBalance(-amount);
+        drawer.add(-balance);
       }
     }
   }
