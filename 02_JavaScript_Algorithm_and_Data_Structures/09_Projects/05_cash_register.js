@@ -34,62 +34,85 @@ Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins 
  * 3. Repeat (recursive function? - base case: 0 balance OR no change left in drawer)
  * 
  */
+
+function toPennies(dollarAmount) {
+  let dollarString = (dollarAmount * 100).toString();
+  return parseInt(dollarString);
+}
+function toDollars(pennyAmount) {
+  let pennyString = (pennyAmount / 100).toString();
+  return parseFloat(pennyString);
+}
+/**
+ * @description Key-value pairs of the name of the currency and its value in pennies.
+ */
 class Currencies {
   static values = new Map([
-    ["ONE HUNDRED", 100],
-    ["TWENTY", 20],
-    ["TEN", 10],
-    ["FIVE", 5],
-    ["ONE", 1],
-    ["QUARTER", 0.25],
-    ["DIME", 0.10],
-    ["NICKEL", 0.05],
-    ["PENNY", 0.01],
+    ["ONE HUNDRED", 10000],
+    ["TWENTY", 2000],
+    ["TEN", 1000],
+    ["FIVE", 500],
+    ["ONE", 100],
+    ["QUARTER", 25],
+    ["DIME", 10],
+    ["NICKEL", 5],
+    ["PENNY", 1],
   ]);
 }
 
-
-// TODO write remove() function
 class CashCollection {
   /**
-   * @type {{currency: string, amount: number, value: number}[]}
-   */
-  #cash = [];
-  /**
-   * @type {Object.<string, {amount: number, value: number}>}
+   * @type {Map<string, {amount: number, value: number}>}
    */
   #cashmap = new Map();
-  /**
-   * @param {Array<Array>} cid 
-   */
-  // constructor(cid) {
-  //   this.#cash = cid.map(
-  //     element => {
-  //       let name = element[0];
-  //       let amount = element[1];
-  //       return {
-  //         currency: name,
-  //         amount: amount,
-  //         value: Currencies.values.get(name)
-  //       }
-  //     }
-  //   )
-  // }
 
-  constructor(cid) {
-    cid.forEach(
-      element => {
-        let name = element[0];
-        let amount = element[1];
+  constructor() {
+    Currencies.values.forEach(
+      (currencyValue, currencyName) => {
         this.#cashmap.set(
-          name, { amount: amount, value: Currencies.values.get(name) }
+          currencyName,
+          {
+            amount: 0,
+            value: currencyValue
+          }
         )
       }
     )
   }
-  getBalance(currencyName) {
-    return this.#cashmap.get(currencyName).amount;
+
+  load(cid) {
+    cid.forEach(
+      element => {
+        let name = element[0];
+        let amount = toPennies(element[1]);
+        this.#cashmap.get(name).amount = amount;
+      }
+    )
   }
+
+  unload() {
+    let amount = [];
+
+    this.#cashmap.forEach(
+      (value, key, map) => {
+        if (value.amount != 0) {
+          amount.push([key, toDollars(value.amount)])
+        }
+      }
+    )
+
+    return amount;
+
+  }
+
+  getTotal() {
+    let accumulator = 0;
+    this.#cashmap.forEach(
+      value => accumulator += value.amount
+    );
+    return accumulator;
+  }
+
   /**
    * @param {string} currencyName 
    * @param {number} amount 
@@ -97,32 +120,96 @@ class CashCollection {
   add(currencyName, amount) {
     this.#cashmap.get(currencyName).amount += amount;
   }
+
+  /**
+   * @param {string} currencyName 
+   * @param {number} amount 
+   */
   deduct(currencyName, amount) {
     this.#cashmap.get(currencyName).amount -= amount;
   }
-}
-function checkCashRegister(price, cash, cid) {
-  let change;
-  let balance = price;
-  let drawer = new CashCollection(cid);
-
-  while (balance > 0) {
-    reduceBalance()
-  }
-
   /**
-   * @param {number} balance 
-   * @param {CashCollection} drawer 
+   * @param {number} amount 
+   * @returns {string}
    */
-  // TODO revisit this logic
-  function reduceBalance(balance, drawer) {
-    for (const currency of Currencies.values) {
-      if (drawer.getBalance(currency) > 0) {
-        drawer.add(-balance);
+  getLargestAvailable(amount) {
+    for (const currencyName of this.#cashmap) {
+      if (currencyName[1].amount == 0) continue;
+      if (currencyName[1].value <= amount) {
+        return currencyName[0];
       }
     }
+    return undefined;
   }
-  return change;
+
+}
+// TODO:
+// ! Logic for checkCashRegister
+// ! Convert change<CashCollection> to correct format
+
+function checkCashRegister(price, cash, cid) {
+  let balance = {
+    amount: toPennies(cash - price),
+  };
+  let drawer = new CashCollection();
+  drawer.load(cid);
+  let change = new CashCollection()
+  let status;
+  const INSUFFICIENT_FUNDS = "INSUFFICIENT_FUNDS";
+  const OPEN = "OPEN";
+  const CLOSED = "CLOSED";
+
+  if (drawer.getTotal() == balance.amount) {
+    return {
+      status: CLOSED, change: cid
+    };
+  }
+
+  else if (balance.amount > drawer.getTotal()) {
+    return {
+      status: INSUFFICIENT_FUNDS, change: []
+    };
+  }
+
+  else if (balance.amount < drawer.getTotal()) status = OPEN;
+  let result; 
+  do {
+    result = reduceBalance(balance, drawer, change)
+  } while (balance.amount > 0 && result == true);
+
+  if (result == undefined) return {
+      status: "INSUFFICIENT_FUNDS", change: []
+    }
+  
+  return { status: OPEN, change: change.unload() }
+
 }
 
-checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+
+/**
+ * @param {{amount: number}} balance 
+ * @param {CashCollection} drawer 
+ * @param {CashCollection} change 
+ */
+function reduceBalance(balance, drawer, change) {
+  // 1. Compare if balance == 0?
+  // 2. Get largest available denomination for balance
+  // 3. Reduce drawer by lagest available
+  // 4. Add largest available to change
+
+  // Dependencies: balance, drawer, change
+  let largest = drawer.getLargestAvailable(balance.amount);
+  let amountOfLargest = Currencies.values.get(largest);
+
+  if (amountOfLargest == undefined) {
+    return undefined;
+  }
+
+  change.add(largest, amountOfLargest);
+  balance.amount -= amountOfLargest;
+  drawer.deduct(largest, amountOfLargest);
+  return true;
+}
+// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+// console.table(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]));
