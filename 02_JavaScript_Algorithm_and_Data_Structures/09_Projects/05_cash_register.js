@@ -13,28 +13,6 @@ Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value for th
 Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and bills, sorted in highest to lowest order, as the value of the change key.
  */
 
-/* 
-* Things to consider:
-*   price == cash
-*   how to determine correct amount of change?
-*     - maybe start with highest denomination & go down
-* 
-* {status: "INSUFFICIENT_FUNDS", change: []}
-* {status: "CLOSED", change: [...]} // if CID == change
-* {status: "OPEN", change: [...]}
-* 
-* 
- */
-
-/*
- *
- * How to determine correct amount of change?
- * 1. Subtracting by the largest possible denomination that is less than or equal to amount owed
- * 2. Reduce CID by amount from step 1
- * 3. Repeat (recursive function? - base case: 0 balance OR no change left in drawer)
- * 
- */
-
 function toPennies(dollarAmount) {
   let dollarString = (dollarAmount * 100).toString();
   return parseInt(dollarString);
@@ -143,10 +121,7 @@ class CashCollection {
   }
 
 }
-// TODO:
-// ! Logic for checkCashRegister
-// ! Convert change<CashCollection> to correct format
-
+// TODO rewrite this...
 function checkCashRegister(price, cash, cid) {
   let balance = {
     amount: toPennies(cash - price),
@@ -155,19 +130,16 @@ function checkCashRegister(price, cash, cid) {
   drawer.load(cid);
   let change = new CashCollection()
   let status;
-  const INSUFFICIENT_FUNDS = "INSUFFICIENT_FUNDS";
-  const OPEN = "OPEN";
-  const CLOSED = "CLOSED";
 
   if (drawer.getTotal() == balance.amount) {
     return {
-      status: CLOSED, change: cid
+      status: "CLOSED", change: cid
     };
   }
 
   else if (balance.amount > drawer.getTotal()) {
     return {
-      status: INSUFFICIENT_FUNDS, change: []
+      status: "INSUFFICIENT_FUNDS", change: []
     };
   }
 
@@ -192,12 +164,6 @@ function checkCashRegister(price, cash, cid) {
  * @param {CashCollection} change 
  */
 function reduceBalance(balance, drawer, change) {
-  // 1. Compare if balance == 0?
-  // 2. Get largest available denomination for balance
-  // 3. Reduce drawer by lagest available
-  // 4. Add largest available to change
-
-  // Dependencies: balance, drawer, change
   let largest = drawer.getLargestAvailable(balance.amount);
   let amountOfLargest = Currencies.values.get(largest);
 
