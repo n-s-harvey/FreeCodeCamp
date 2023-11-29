@@ -2,12 +2,16 @@
 https://www.freecodecamp.org/learn/front-end-development-libraries/
 
 ## Table of Contents
+<details>
+<summary>(Click to expand)</summary>  
+
 [Including Bootstrap in your Project](#responsive-design-with-bootstrap-fluid-containers)  
 [Making Images Responsive](#make-images-mobile-responsive)  
 [Centering Text](#center-text-with-bootstrap)  
 [Buttons](#bootstrap-buttons)  
 [Bootstrap Grid](#use-the-bootstrap-grid-to-put-elements-side-by-side)  
 [FontAwesome Icons](#add-font-awesome-icons-to-buttons)  
+</details>
 
 ## Responsive Design with Bootstrap Fluid Containers
 
