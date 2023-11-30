@@ -122,6 +122,7 @@ class CashCollection {
 
 }
 // TODO rewrite this...
+// We are in the new branch
 function checkCashRegister(price, cash, cid) {
   let balance = {
     amount: toPennies(cash - price),
