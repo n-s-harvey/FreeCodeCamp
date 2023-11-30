@@ -38,6 +38,12 @@ class Currencies {
   ]);
 }
 
+class Status {
+  static INSUFFICIENT_FUNDS = "INSUFFICENT_FUNDS";
+  static OPEN = "OPEN";
+  static CLOSED = "CLOSED";
+}
+
 class CashCollection {
   /**
    * @type {Map<string, {amount: number, value: number}>}
@@ -122,61 +128,54 @@ class CashCollection {
 
 }
 // TODO rewrite this...
-// We are in the new branch
 function checkCashRegister(price, cash, cid) {
-  let balance = {
-    amount: toPennies(cash - price),
-  };
-  let drawer = new CashCollection();
-  drawer.load(cid);
-  let change = new CashCollection()
-  let status;
+  let balanceRemaining = toPennies(cash - price);
+  let cashDrawer = new CashCollection();
+  cashDrawer.load(cid);
+  let changeDue = new CashCollection()
 
-  if (drawer.getTotal() == balance.amount) {
+  if (balanceRemaining == cashDrawer.getTotal()) {
     return {
-      status: "CLOSED", change: cid
+      status: Status.CLOSED, change: cid
     };
   }
 
-  else if (balance.amount > drawer.getTotal()) {
+  else if (balanceRemaining > cashDrawer.getTotal()) {
     return {
-      status: "INSUFFICIENT_FUNDS", change: []
+      status: Status.INSUFFICIENT_FUNDS, change: []
     };
   }
 
-  else if (balance.amount < drawer.getTotal()) status = OPEN;
-  let result; 
-  do {
-    result = reduceBalance(balance, drawer, change)
-  } while (balance.amount > 0 && result == true);
+  let isExactChange = isExactChangeAvailable(balanceRemaining, cashDrawer, changeDue);
 
-  if (result == undefined) return {
-      status: "INSUFFICIENT_FUNDS", change: []
-    }
-  
-  return { status: OPEN, change: change.unload() }
+  if (!isExactChange) return {
+    status: Status.INSUFFICIENT_FUNDS, change: []
+  }
 
+  else {
+    return { status: Status.OPEN, change: changeDue.unload() }
+  }
 }
 
 
 /**
- * @param {{amount: number}} balance 
+ * @param {number} balance 
  * @param {CashCollection} drawer 
  * @param {CashCollection} change 
  */
-function reduceBalance(balance, drawer, change) {
-  let largest = drawer.getLargestAvailable(balance.amount);
-  let amountOfLargest = Currencies.values.get(largest);
+function isExactChangeAvailable(balance, drawer, change) {
+  do {
+    let largest = drawer.getLargestAvailable(balance);
+    let amountOfLargest = Currencies.values.get(largest);
 
-  if (amountOfLargest == undefined) {
-    return undefined;
-  }
+    if (amountOfLargest == undefined) return false;
 
-  change.add(largest, amountOfLargest);
-  balance.amount -= amountOfLargest;
-  drawer.deduct(largest, amountOfLargest);
+    change.add(largest, amountOfLargest);
+    balance -= amountOfLargest;
+    drawer.deduct(largest, amountOfLargest);
+  } while (balance > 0)
   return true;
 }
 // checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
-// console.table(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
-console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]));
+console.table(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
+// console.log(checkCashRegister(19.5, 20, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]));
