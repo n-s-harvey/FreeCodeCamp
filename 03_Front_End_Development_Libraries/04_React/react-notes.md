@@ -1,21 +1,73 @@
 # React Notes - from FreeCodeCamp
 https://www.freecodecamp.org/learn/front-end-development-libraries/
 
-## Table of Contents
+### Table of Contents
 
 <details>
-<Summary>(Click to expand)
+<Summary>(Click to expand)</Summary>
 
-- [Introduction to React](#intro-to-react)  
-  - [Creating Simple JSX](#create-a-simple-jsx-element)  
-  - [Creating Complex JSX](#create-a-complex-jsx-element)  
-  - [Adding Comments](#adding-comments-in-jsx)  
-  
+- [React Notes - from FreeCodeCamp](#react-notes---from-freecodecamp)
+    - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+    - [Intro to React](#intro-to-react)
+    - [Create a Simple JSX Element](#create-a-simple-jsx-element)
+    - [Create a Complex JSX Element](#create-a-complex-jsx-element)
+    - [Adding Comments in JSX](#adding-comments-in-jsx)
+    - [Render HTML Elements to the DOM](#render-html-elements-to-the-dom)
+    - [Define an HTML Class in JSX](#define-an-html-class-in-jsx)
+    - [Self-Closing JSX Tags](#self-closing-jsx-tags)
+  - [Components](#components)
+    - [Create a Stateless Functional Component](#create-a-stateless-functional-component)
+    - [Create a React Component](#create-a-react-component)
+    - [Create a Component with Composition](#create-a-component-with-composition)
+    - [Use React to Render Nested Components](#use-react-to-render-nested-components)
+    - [Compose React Components](#compose-react-components)
+    - [Render a Class Component to the DOM](#render-a-class-component-to-the-dom)
+  - [Props](#props)
+    - [Pass Props to a Stateless Functional Component](#pass-props-to-a-stateless-functional-component)
+    - [Pass an Array as Props](#pass-an-array-as-props)
+    - [Use Default Props](#use-default-props)
+    - [Override Default Props](#override-default-props)
+    - [Use PropTypes to Define the Props You Expect](#use-proptypes-to-define-the-props-you-expect)
+    - [Access Props Using `this.props`](#access-props-using-thisprops)
+  - [Summary of Stateless Functional Components, Stateless Components, and Stateful Components](#summary-of-stateless-functional-components-stateless-components-and-stateful-components)
+  - [Stateful Components](#stateful-components)
+    - [Create a Stateful Component](#create-a-stateful-component)
+    - [Render State in the User Interface](#render-state-in-the-user-interface)
+    - [Another Way to Render State in the User Interface](#another-way-to-render-state-in-the-user-interface)
+    - [Set State with `this.setState()`](#set-state-with-thissetstate)
+    - [Bind `this` to a Class Method](#bind-this-to-a-class-method)
+    - [Use State to Toggle an Element](#use-state-to-toggle-an-element)
+    - [Write a Simple Counter](#write-a-simple-counter)
+    - [Create a Controlled Input](#create-a-controlled-input)
+    - [Create a Controlled Form](#create-a-controlled-form)
+    - [Pass State as Props to Child Components](#pass-state-as-props-to-child-components)
+    - [Pass a Callback as Props](#pass-a-callback-as-props)
+  - [Lifecycle Methods](#lifecycle-methods)
+    - [Use the Lifecycle Method `componentWillMount()`](#use-the-lifecycle-method-componentwillmount)
+    - [Use the Lifecycle Method `componentDidMount()`](#use-the-lifecycle-method-componentdidmount)
+  - [Event Listeners](#event-listeners)
+    - [Add Event Listeners](#add-event-listeners)
+    - [Optimize Re-Renders with `shouldComponentUpdate()`](#optimize-re-renders-with-shouldcomponentupdate)
+  - [Styles and Rendering](#styles-and-rendering)
+    - [Introducing Inline Styles](#introducing-inline-styles)
+    - [Add Inline Styles in React](#add-inline-styles-in-react)
+    - [Use Advanced JavaScript in React Render Method](#use-advanced-javascript-in-react-render-method)
+    - [Render with an `If-Else` Condition](#render-with-an-if-else-condition)
+    - [Use `&&` for a More Concise Conditional](#use--for-a-more-concise-conditional)
+    - [Use a Ternary Expression for Conditional Rendering](#use-a-ternary-expression-for-conditional-rendering)
+    - [Render Conditionally from Props](#render-conditionally-from-props)
+    - [Change Inline CSS Conditionally Based on Component State](#change-inline-css-conditionally-based-on-component-state)
+    - [Use `Array.map()` to Dynamically Render Elements](#use-arraymap-to-dynamically-render-elements)
+    - [Give Sibling Elements a Unique Key Attribute](#give-sibling-elements-a-unique-key-attribute)
+    - [Use `Array.filter()` to Dynamically Filter an Array](#use-arrayfilter-to-dynamically-filter-an-array)
+    - [Render React on the Server with `renderToString`](#render-react-on-the-server-with-rendertostring)
+
 
 </details>
 
-
-## Intro to React
+## Introduction
+### Intro to React
 
 React uses JSX, which allows you to write HTML within JavaScript. 
 
@@ -27,13 +79,13 @@ To write JavaScript directly within JSX, include the code you want executed as J
 
 JSX needs to be transpiled since it's not a valid JavaScript language.
 
-## Create a Simple JSX Element
+### Create a Simple JSX Element
 
 ```jsx
 const JSX = <h1>Hello JSX!</h1>;
 ```
 
-## Create a Complex JSX Element
+### Create a Complex JSX Element
 
 Nested JSX must return a single element. It can be a container (like a div wrapped around your content), but it cannot return multiple elements.
 
@@ -64,7 +116,7 @@ const JSX = (
 );
 ```
 
-## Adding Comments in JSX
+### Adding Comments in JSX
 
 To add comments, use the braces to execute as JavaScript:
 
@@ -82,7 +134,7 @@ const JSX = (
 );
 ```
 
-## Render HTML Elements to the DOM
+### Render HTML Elements to the DOM
 
 We can render JSX directly to the HTML DOM using React's rendering API, ReactDOM.
 
@@ -97,7 +149,7 @@ One way to select the DOM node to render to is to call
 document.getElementById('id-name')
 ```
 
-## Define an HTML Class in JSX
+### Define an HTML Class in JSX
 
 JSX uses `className` to define HTML classes (`class` is a reserved JavaScript keyword).
 
@@ -111,13 +163,15 @@ const JSX = (
 );
 ```
 
-## Self-Closing JSX Tags
+### Self-Closing JSX Tags
 
 Self-closing tags, like `<br />`, must always be written as self-closing in JSX (meaning `<br></br>` can't be used as it won't transpile)
 
 However, in JSX, all elements can be self-closed: `<div />` will correctly transpile but it won't allow you to add any content to the `div`.
 
-## Create a Stateless Functional Component
+## Components
+
+### Create a Stateless Functional Component
 
 Defining a React component with a JavaScript function creates a stateless functional component - it can receive data and render it, but does not manage or track changes to that data.
 
@@ -131,7 +185,7 @@ const DemoComponent = function() {
 };
 ```
 
-## Create a React Component
+### Create a React Component
 
 The other way to define a React component is with the `class` syntax.
 
@@ -152,7 +206,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Create a Component with Composition
+### Create a Component with Composition
 
 To render a component as a child in a React component, include the component name written as a custom HTML tag in the JSX.
 
@@ -196,7 +250,7 @@ class ParentComponent extends React.Component {
 };
 ```
 
-## Use React to Render Nested Components
+### Use React to Render Nested Components
 
 Think about UI as basic building blocks. In the below code, `TypesOfFruit` is a child of `Fruits`, which is a child of `TypesOfFood`.
 
@@ -239,7 +293,7 @@ class TypesOfFood extends React.Component {
 };
 ```
 
-## Compose React Components
+### Compose React Components
 
 You can mix JSX elements, stateless functional components, and ES6 class components within other components.
 
@@ -275,7 +329,7 @@ class TypesOfFood extends React.Component {
 };
 ```
 
-## Render a Class Component to the DOM
+### Render a Class Component to the DOM
 
 For React code to render, a call must be made to the ReactDOM API.
 
@@ -313,7 +367,9 @@ class TypesOfFood extends React.Component {
 ReactDOM.render(<TypesOfFood />, document.getElementById('challenge-node'))
 ```
 
-## Pass Props to a Stateless Functional Component
+## Props
+
+### Pass Props to a Stateless Functional Component
 
 You can pass a property to a stateless function component with the following syntax:
 
@@ -359,7 +415,7 @@ class Calendar extends React.Component {
 };
 ```
 
-## Pass an Array as Props
+### Pass an Array as Props
 
 To pass an array to a JSX element, it must be treated as JavaScript and wrapped in curly braces.
 
@@ -375,7 +431,7 @@ Array methods such as `join()` can be used when accessing the property:
 const ChildComponent = (props) => <p>{props.colors.join(', ')}</p>
 ```
 
-## Use Default Props
+### Use Default Props
 
 Syntax:
 
@@ -383,7 +439,7 @@ Syntax:
 ComponentName.defaultProps = { property-name: value };
 ```
 
-## Override Default Props
+### Override Default Props
 
 To override default props, explicitly set the prop values.
 
@@ -408,7 +464,7 @@ class ShoppingCart extends React.Component {
 };
 ```
 
-## Use PropTypes to Define the Props You Expect
+### Use PropTypes to Define the Props You Expect
 
 It's best practice to define the type when you know it ahead of time. React will throw an error if the type doesn't match the expected type.
 
@@ -449,7 +505,7 @@ class ShoppingCart extends React.Component {
 };
 ```
 
-## Access Props Using `this.props`
+### Access Props Using `this.props`
 
 If the component that you're passing a prop to is an ES6 class component, use the `this` keyword:
 
@@ -519,8 +575,8 @@ Camper.defaultProps = {name: 'CamperBot'};
 
 Camper.propTypes = {name: PropTypes.string.isRequired};
 ```
-
-## Create a Stateful Component
+## Stateful Components
+### Create a Stateful Component
 
 The `state` consists of any data your app needs to know about.
 
@@ -548,7 +604,7 @@ class StatefulComponent extends React.Component {
 };
 ```
 
-## Render State in the User Interface
+### Render State in the User Interface
 
 If a component is stateful, it will always have access to the data in `state` in its `render()` method with `this.state`.
 
@@ -570,7 +626,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Another Way to Render State in the User Interface
+### Another Way to Render State in the User Interface
 
 In the `render()` method, before the `return` statement, you can write JavaScript and then use `props` and/or `state` in the return value.
 
@@ -593,7 +649,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Set State with `this.setState()`
+### Set State with `this.setState()`
 
 To use `.setState()`, pass in an object with key-value pairs.
 
@@ -625,8 +681,7 @@ class MyComponent extends React.Component {
   }
 };
 ```
-
-## Bind `this` to a Class Method
+### Bind `this` to a Class Method
 
 A class method typically needs access to the `this` keyword, so it is useful to bind `this` in the constructor for the methods that need access
 
@@ -655,7 +710,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Use State to Toggle an Element
+### Use State to Toggle an Element
 
 Remember that React may batch multiple `setState()` calls into a single update. So, we should avoid using code like this:
 
@@ -706,7 +761,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-## Write a Simple Counter
+### Write a Simple Counter
 
 ```jsx
 class Counter extends React.Component {
@@ -747,7 +802,7 @@ class Counter extends React.Component {
 };
 ```
 
-## Create a Controlled Input
+### Create a Controlled Input
 
 Form control elements for text input, like `input` and `textarea`, maintain their own state in the DOM. 
 
@@ -779,7 +834,7 @@ class ControlledInput extends React.Component {
 };
 ```
 
-## Create a Controlled Form
+### Create a Controlled Form
 
 ```jsx
 class MyForm extends React.Component {
@@ -819,7 +874,7 @@ class MyForm extends React.Component {
 }
 ```
 
-## Pass State as Props to Child Components
+### Pass State as Props to Child Components
 
 A common pattern is to have a stateful component containing a `state` that then renders child components, which you may want to have access to some pieces of `state` passed as props.
 
@@ -859,7 +914,7 @@ class Navbar extends React.Component {
 };
 ```
 
-## Pass a Callback as Props
+### Pass a Callback as Props
 
 You can pass handler functions or any method defined on a React component to a child component.
 
@@ -917,8 +972,8 @@ class RenderInput extends React.Component {
   }
 };
 ```
-
-## Use the Lifecycle Method `componentWillMount()`
+## Lifecycle Methods
+### Use the Lifecycle Method `componentWillMount()`
 
 These are also called lifecycle hooks. 
 
@@ -936,7 +991,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Use the Lifecycle Method `componentDidMount()`
+### Use the Lifecycle Method `componentDidMount()`
 
 The best practice with React to place API calls in the `componentDidMount()`. It is called after a component is mounted to the DOM. Any calls to `setState()` will trigger a re-rendering of the component.
 
@@ -966,8 +1021,8 @@ class MyComponent extends React.Component {
   }
 }
 ```
-
-## Add Event Listeners
+## Event Listeners
+### Add Event Listeners
 
 The `componentDidMount()` is the best place to attach any event listeners.
 
@@ -1009,7 +1064,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Optimize Re-Renders with `shouldComponentUpdate()`
+### Optimize Re-Renders with `shouldComponentUpdate()`
 
 The default behavior when a component receives new `state` or `props` is to re-render. 
 
@@ -1057,8 +1112,8 @@ class Controller extends React.Component {
   }
 }
 ```
-
-## Introducing Inline Styles
+## Styles and Rendering
+### Introducing Inline Styles
 
 JSX elements use the `style` attribute, but because of transpilation, it will need to be equal to a JavaScript `object`.
 
@@ -1068,7 +1123,7 @@ React does not accept *kebab-case* in the style object, so camelCase is used:
 <div style={{color: "yellow", fontSize: 16}}>Mellow Yellow</div>
 ```
 
-## Add Inline Styles in React
+### Add Inline Styles in React
 
 All property value length units (like `height`, `width`, and `fontSize`) are assumed to be in `px` unless otherwise specified.
 
@@ -1088,7 +1143,7 @@ class Colorful extends React.Component {
 };
 ```
 
-## Use Advanced JavaScript in React Render Method
+### Use Advanced JavaScript in React Render Method
 
 Before the `return` statement inside the `render` method, you can write JavaScript directly without the need for curly braces.
 
@@ -1166,7 +1221,7 @@ class MagicEightBall extends React.Component {
 }
 ```
 
-## Render with an `If-Else` Condition
+### Render with an `If-Else` Condition
 
 It seems that using `if-else` within JSX does not work: even if wrapped in curly braces, it expects an expression. Instead, the `if-else` should be outside of the return statement.
 
@@ -1204,7 +1259,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Use `&&` for a More Concise Conditional
+### Use `&&` for a More Concise Conditional
 
 Using the `&&` within a `return` statement allows you to avoid multiple `if-else` and instead render content if a condition is true:
 
@@ -1239,7 +1294,7 @@ class MyComponent extends React.Component {
 };
 ```
 
-## Use a Ternary Expression for Conditional Rendering
+### Use a Ternary Expression for Conditional Rendering
 
 A ternary operator can be used in JSX by wrapping in curly braces:
 
@@ -1291,7 +1346,7 @@ class CheckUserAge extends React.Component {
 }
 ```
 
-## Render Conditionally from Props
+### Render Conditionally from Props
 
 It is common to use the value of a given prop to make decisions about what to render.
 
@@ -1333,7 +1388,7 @@ class GameOfChance extends React.Component {
 }
 ```
 
-## Change Inline CSS Conditionally Based on Component State
+### Change Inline CSS Conditionally Based on Component State
 
 To change inline CSS conditionally, modify the styles object assigned to the JSX elements in the render method.
 
@@ -1370,7 +1425,7 @@ class GateKeeper extends React.Component {
 };
 ```
 
-## Use `Array.map()` to Dynamically Render Elements
+### Use `Array.map()` to Dynamically Render Elements
 
 Often, we have no way of knowing what the state of an application is until runtime. 
 
@@ -1421,7 +1476,7 @@ class MyToDoList extends React.Component {
 }
 ```
 
-## Give Sibling Elements a Unique Key Attribute
+### Give Sibling Elements a Unique Key Attribute
 
 In the last snippet, whenever an array of elements is created, each element needs a unique `key` attribute. React uses these keys to keep track of which items are added, changed, or removed.
 
@@ -1456,7 +1511,7 @@ function Frameworks() {
 };
 ```
 
-## Use `Array.filter()` to Dynamically Filter an Array
+### Use `Array.filter()` to Dynamically Filter an Array
 
 ```jsx
 class MyComponent extends React.Component {
@@ -1508,7 +1563,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-## Render React on the Server with `renderToString`
+### Render React on the Server with `renderToString`
 
 Typically, React components are rendered on the client. However, there are some times where you will want to render on the server.
 
