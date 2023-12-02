@@ -844,3 +844,435 @@ class Navbar extends React.Component {
   }
 };
 ```
+
+## Pass a Callback as Props
+
+You can pass handler functions or any method defined on a React component to a child component.
+
+```jsx
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+        <GetInput input={this.state.inputValue} handleChange={this.handleChange} />
+        <RenderInput input={this.state.inputValue} />
+       </div>
+    );
+  }
+};
+
+class GetInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+};
+```
+
+## Use the Lifecycle Method `componentWillMount()`
+
+These are also called lifecycle hooks. 
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    console.log("Component about to mount");
+  }
+  render() {
+    return <div />
+  }
+};
+```
+
+## Use the Lifecycle Method `componentDidMount()`
+
+The best practice with React to place API calls in the `componentDidMount()`. It is called after a component is mounted to the DOM. Any calls to `setState()` will trigger a re-rendering of the component.
+
+When you call an API in this method and set the state with the data that the API returns, it will automatically trigger an update when the data is received.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeUsers: null
+    };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Active Users: {this.state.activeUsers}</h1>
+      </div>
+    );
+  }
+}
+```
+
+## Add Event Listeners
+
+The `componentDidMount()` is the best place to attach any event listeners.
+
+React has a synthetic event system that wraps the native event system; even though different browsers may handle events differently, how developers handle the synthetic system is the same.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress)
+  }
+  handleEnter() {
+    this.setState((state) => ({
+      message: state.message + 'You pressed the enter key! '
+    }));
+  }
+  handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      this.handleEnter();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
+    );
+  }
+};
+```
+
+## Optimize Re-Renders with `shouldComponentUpdate()`
+
+The default behavior when a component receives new `state` or `props` is to re-render. 
+
+To optimize performance, you can use `shouldComponentUpdate()`, which takes `nextProps` and `nextState` as parameters, and lets you define if the components should update or not.
+
+One way to use this is to compare `this.props` to `nextProps` - if they are equal, then the component wouldn't need to be re-rendered.
+
+```jsx
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should I update?');
+    if (nextProps.value % 2 == 0) return true;
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>;
+  }
+}
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState(state => ({
+      value: state.value + 1
+    }));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value} />
+      </div>
+    );
+  }
+}
+```
+
+## Introducing Inline Styles
+
+JSX elements use the `style` attribute, but because of transpilation, it will need to be equal to a JavaScript `object`.
+
+React does not accept *kebab-case* in the style object, so camelCase is used:
+
+```jsx
+<div style={{color: "yellow", fontSize: 16}}>Mellow Yellow</div>
+```
+
+## Add Inline Styles in React
+
+All property value length units (like `height`, `width`, and `fontSize`) are assumed to be in `px` unless otherwise specified.
+
+```jsx
+const styles = {
+  color: "purple",
+  fontSize: "40",
+  border: "2px solid purple"
+}
+
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style={styles}>Style Me!</div>
+    );
+  }
+};
+```
+
+## Use Advanced JavaScript in React Render Method
+
+Before the `return` statement inside the `render` method, you can write JavaScript directly without the need for curly braces.
+
+```jsx
+const inputStyle = {
+  width: 235,
+  margin: 5
+};
+
+class MagicEightBall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      randomIndex: ''
+    };
+    this.ask = this.ask.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+    const possibleAnswers = [
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt',
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      "Don't count on it",
+      'My reply is no',
+      'My sources say no',
+      'Most likely',
+      'Outlook not so good',
+      'Very doubtful'
+    ];
+    const answer = possibleAnswers[this.state.randomIndex]; 
+    return (
+      <div>
+        <input
+          type='text'
+          value={this.state.userInput}
+          onChange={this.handleChange}
+          style={inputStyle}
+        />
+        <br />
+        <button onClick={this.ask}>Ask the Magic Eight Ball!</button>
+        <br />
+        <h3>Answer:</h3>
+        <p>
+          {answer}
+        </p>
+      </div>
+    );
+  }
+}
+```
+
+## Render with an `If-Else` Condition
+
+It seems that using `if-else` within JSX does not work: even if wrapped in curly braces, it expects an expression. Instead, the `if-else` should be outside of the return statement.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState((state) => ({
+      display: !state.display
+    }));
+  }
+  render() {
+    if (this.state.display) {
+      return (
+        <div>
+          <button onClick={this.toggleDisplay}>Toggle Display</button>
+          <h1>Displayed!</h1>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <button onClick={this.toggleDisplay}>Toggle Display</button>
+        </div>
+      );
+    }
+  }
+};
+```
+
+## Use `&&` for a More Concise Conditional
+
+Using the `&&` within a `return` statement allows you to avoid multiple `if-else` and instead render content if a condition is true:
+
+```jsx
+{condition && <p>markup</p>}
+```
+
+You can also string multiple `condition`s together by writing `&&` after each.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState(state => ({
+      display: !state.display
+    }));
+  }
+  render() {
+    return (
+       <div>
+         <button onClick={this.toggleDisplay}>Toggle Display</button>
+         {this.state.display && <h1>Displayed!</h1>}
+       </div>
+    );
+  }
+};
+```
+
+## Use a Ternary Expression for Conditional Rendering
+
+A ternary operator can be used in JSX by wrapping in curly braces:
+
+```jsx
+const inputStyle = {
+  width: 235,
+  margin: 5
+};
+
+class CheckUserAge extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: "",
+      userAge: ""
+    };
+    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.setState({
+      input: e.target.value,
+      userAge: ''
+    });
+  }
+  submit() {
+    this.setState(state => ({
+      userAge: state.input
+    }));
+  }
+  render() {
+    const buttonOne = <button onClick={this.submit}>Submit</button>;
+    const buttonTwo = <button>You May Enter</button>;
+    const buttonThree = <button>You Shall Not Pass</button>;
+    return (
+      <div>
+        <h3>Enter Your Age to Continue</h3>
+        <input
+          style={inputStyle}
+          type='number'
+          value={this.state.input}
+          onChange={this.handleChange}
+        />
+        <br />
+        {this.state.userAge =="" ? buttonOne : this.state.userAge >= 18 ? buttonTwo : buttonThree  }
+      </div>
+    );
+  }
+}
+```
