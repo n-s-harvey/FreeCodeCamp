@@ -1276,3 +1276,243 @@ class CheckUserAge extends React.Component {
   }
 }
 ```
+
+## Render Conditionally from Props
+
+It is common to use the value of a given prop to make decisions about what to render.
+
+```jsx
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return this.props.fiftyFifty ? <h1>You Win!</h1> : <h1>You Lose!</h1>;
+  }
+}
+
+class GameOfChance extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 1
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(prevState => {
+      return {
+        counter: prevState.counter + 1
+      }
+    });
+  }
+  render() {
+    const expression = Math.random() >= 0.5; // Change this line
+    return (
+      <div>
+        <button onClick={this.handleClick}>Play Again</button>
+        <Results fiftyFifty={expression} />
+        <p>{'Turn: ' + this.state.counter}</p>
+      </div>
+    );
+  }
+}
+```
+
+## Change Inline CSS Conditionally Based on Component State
+
+To change inline CSS conditionally, modify the styles object assigned to the JSX elements in the render method.
+
+```jsx
+class GateKeeper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ input: event.target.value })
+  }
+  render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    if (this.state.input.length > 15) inputStyle = {
+      border: '3px solid red'
+    }
+    return (
+      <div>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
+      </div>
+    );
+  }
+};
+```
+
+## Use `Array.map()` to Dynamically Render Elements
+
+Often, we have no way of knowing what the state of an application is until runtime. 
+
+```jsx
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      toDoList: []
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+  render() {
+    const items = this.state.toDoList.map(element => <li>{element}</li>); // Change this line
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder='Separate Items With Commas'
+        />
+        <br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>{items}</ul>
+      </div>
+    );
+  }
+}
+```
+
+## Give Sibling Elements a Unique Key Attribute
+
+In the last snippet, whenever an array of elements is created, each element needs a unique `key` attribute. React uses these keys to keep track of which items are added, changed, or removed.
+
+Keys only need to be unique between sibling elements.
+
+In the below snippet, the index of the item in the array is used as a unique `key`.
+
+```jsx
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = frontEndFrameworks.map(
+    (element, index) => {
+      return <li key={index}>{element}</li>
+    }
+  ); 
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+        {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
+```
+
+## Use `Array.filter()` to Dynamically Filter an Array
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
+    };
+  }
+  render() {
+    const usersOnline = this.state.users.filter(
+      user => user.online
+    ); 
+    const renderOnline = usersOnline.map(
+      (user, index) => <li key={index}>{user.username}</li>
+    ); 
+    return (
+      <div>
+        <h1>Current Online Users:</h1>
+        <ul>{renderOnline}</ul>
+      </div>
+    );
+  }
+}
+```
+
+## Render React on the Server with `renderToString`
+
+Typically, React components are rendered on the client. However, there are some times where you will want to render on the server.
+
+One is to improve performance - instead of sending a large JavaScript bundle to the client, you can instead send HTML.
+
+Additionally, it is easier for web crawlers to crawl your app when it returns HTML.
+
+The `renderToString()` method is available on the `ReactDOMServer`. It takes one argument which is a React element.
+
+```jsx
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+
+ReactDOMServer.renderToString(<App />);
+```
