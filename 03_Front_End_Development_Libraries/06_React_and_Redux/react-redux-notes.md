@@ -172,3 +172,44 @@ class AppWrapper extends React.Component {
   }
 };
 ```
+
+### Map State to Props
+
+To define what state each component has access to, create `mapStateToProps()` and `mapDispatchToProps()`.
+
+The `mapStateToProps()` takes `state` as an argument and returns an object that maps the state to specific property names.
+
+```jsx
+const state = [];
+
+function mapStateToProps(state) {
+  return {
+    messages: state
+  }
+}
+```
+
+### Map Dispatch to Props
+
+`mapDispatchToProps()` returns an object that maps dispatch actions to property names, which become `props`. Each property returns a function that calls `dispatch` with an action creator and any relevant action data. 
+
+`dispatch` should be passed in to `mapDispatchToProps()` as a parameter when you define the function.
+
+```jsx
+const addMessage = (message) => {
+  return {
+    type: 'ADD',
+    message: message
+  }
+};
+
+//! Note that the call to dispatch is wrapped in braces
+// to create an object
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewMessage: (message) => {
+      dispatch(addMessage(message))
+    }
+  }
+}
+```
