@@ -1,15 +1,14 @@
-# Build a Palindrome Checker
-
+# Build a Palindrome Checker 
 A palindrome is a word or phrase that can be read the same way forwards and backwards, ignoring punctuation, case, and spacing.
 
 Note: You'll need to remove all non-alphanumeric characters (punctuation, spaces and symbols) and turn everything into the same case (lower or upper case) in order to check for palindromes.
 
-## Objective:
+## Objective: 
 Build an app that is functionally similar to https://palindrome-checker.freecodecamp.rocks
 
 ## User Stories:
 
-- [ ] You should have an `input` element with an `id` of `text-input`
+- [x] You should have an `input` element with an `id` of `text-input`
 - [ ] You should have a `button` element with an `id` of `check-btn`
 - [ ] You should have a `div` element with an `id` of result
 - [ ] When you click on the `#check-btn` element without entering a value into the `text-input` element, an alert should appear with the text `Please input a value`
