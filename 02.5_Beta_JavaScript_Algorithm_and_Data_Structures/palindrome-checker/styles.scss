@@ -1,0 +1,66 @@
+$text: #0b1d19;
+$background: #f8fcfc;
+$primary: #54bca8;
+$secondary: #d697c1;
+$accent: #cc917e;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: $background;
+  background-image: url("blurry-gradient-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 100vw;
+  display: flex;
+  color: $text;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-style: italic;
+}
+
+article {
+  background-color: $primary;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  gap: 2em;
+  color: white;
+  border-radius: 1em;
+
+  p {
+    font-weight: 200;
+
+  }
+
+  button {
+    border: none;
+    width: 33%;
+    font-size: inherit;
+    background-color: $secondary;
+    border-radius: 0.5em;
+    font-weight: 800;
+  }
+
+  input {
+    font-size: inherit;
+  }
+
+}

@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #f8fcfc;
+  background-image: url("blurry-gradient-haikei.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 100vw;
+  display: flex;
+  color: #0b1d19;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-style: italic;
+}
+
+article {
+  background-color: #54bca8;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  gap: 2em;
+  color: white;
+  border-radius: 1em;
+}
+article p {
+  font-weight: 200;
+}
+article button {
+  border: none;
+  width: 33%;
+  font-size: inherit;
+  background-color: #d697c1;
+  border-radius: 0.5em;
+  font-weight: 800;
+}
+article input {
+  font-size: inherit;
+}
+
+/*# sourceMappingURL=styles.css.map */
