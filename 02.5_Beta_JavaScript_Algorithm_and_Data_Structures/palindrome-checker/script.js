@@ -1,3 +1,8 @@
+const inputField = document.querySelector("#text-input");
+inputField.addEventListener("input", () => { document.querySelector("#result").innerText = "" });
+inputField.addEventListener("keydown", (event) => {
+  if (event.key == "Enter") palindrome();
+});
 function palindrome() {
   const str = document.querySelector("#text-input").value;
   const output = document.querySelector("#result");
@@ -36,5 +41,3 @@ function isEmpty(str) {
   if (str.length == 0) return true;
   else return false;
 }
-const output = document.querySelector("#text-input");
-output.addEventListener("input", () => { document.querySelector("#result").innerText = "" });
