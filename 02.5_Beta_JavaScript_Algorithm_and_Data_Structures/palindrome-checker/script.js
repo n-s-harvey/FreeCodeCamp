@@ -29,10 +29,12 @@ function palindrome() {
   }
 
   // debugger;
-  output.innerText = `${textFromInput} is ${(isPalindrome) ? "" : "not"} a palindrome.`;
+  output.innerHTML = `<span class="input">${textFromInput}</span><br /> is ${(isPalindrome) ? "" : "not"} a palindrome.`;
 }
 
 function isEmpty(str) {
   if (str.length == 0) return true;
   else return false;
 }
+const output = document.querySelector("#text-input");
+output.addEventListener("input", () => { document.querySelector("#result").innerText = "" });
