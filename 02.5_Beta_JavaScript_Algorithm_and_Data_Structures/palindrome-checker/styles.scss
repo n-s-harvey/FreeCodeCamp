@@ -1,8 +1,16 @@
-$text: #0b1d19;
-$background: #f8fcfc;
-$primary: #54bca8;
-$secondary: #d697c1;
-$accent: #cc917e;
+// $text: #0b1d19;
+// $background: #f8fcfc;
+// $primary: #54bca8;
+// $secondary: #d697c1;
+// $accent: #cc917e;
+
+$text: #020417;
+$background: #f6f7fe;
+$primary: #2529ed;
+$secondary: #f589a6;
+$accent: #f06e43;
+
+$info-card: #ECE9EB;
 
 * {
   box-sizing: border-box;
@@ -16,51 +24,75 @@ html {
 
 body {
   background-color: $background;
-  background-image: url("blurry-gradient-haikei.svg");
+  // background-image: url("blurry-gradient-haikei.svg");
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 100vw;
   display: flex;
   color: $text;
-  font-size: 3rem;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
   align-content: center;
   font-family: 'Poppins', sans-serif;
+  padding: 1rem;
 }
 
 h1 {
   text-align: center;
   font-style: italic;
+  color: $accent;
 }
 
+hr {
+  margin: 1rem auto 1rem;
+  width: 50%;
+}
+
+// TODO add transition when height changes?
 article {
-  background-color: $primary;
-  margin: 3rem auto;
+  background-color: $info-card;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2em;
-  gap: 2em;
-  color: white;
+  padding: 1em;
+  gap: 1em;
+  color: $text;
   border-radius: 1em;
+  // border: 0.1em solid $secondary;
+  text-align: center;
 
   p {
-    font-weight: 200;
-
+    // font-weight: 200;
   }
 
   button {
     border: none;
-    width: 33%;
+    color: $background;
+    // width: 33%;
+    width: 5em;
+    height: 2.5em;
     font-size: inherit;
-    background-color: $secondary;
+    background-color: $primary;
     border-radius: 0.5em;
-    font-weight: 800;
+    // font-weight: 800;
+    opacity: 90%;
+    transition: background-color 400ms;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: $accent;
   }
 
   input {
     font-size: inherit;
+  }
+
+  #result {
+    .input {
+      color: $accent;
+    }
   }
 
 }

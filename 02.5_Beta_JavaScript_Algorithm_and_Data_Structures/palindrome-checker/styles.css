@@ -9,49 +9,62 @@ html {
 }
 
 body {
-  background-color: #f8fcfc;
-  background-image: url("blurry-gradient-haikei.svg");
+  background-color: #f6f7fe;
   background-repeat: no-repeat;
   background-size: 100%;
-  width: 100vw;
   display: flex;
-  color: #0b1d19;
-  font-size: 3rem;
+  color: #020417;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
   align-content: center;
   font-family: "Poppins", sans-serif;
+  padding: 1rem;
 }
 
 h1 {
   text-align: center;
   font-style: italic;
+  color: #f06e43;
+}
+
+hr {
+  margin: 1rem auto 1rem;
+  width: 50%;
 }
 
 article {
-  background-color: #54bca8;
-  margin: 3rem auto;
+  background-color: #ECE9EB;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2em;
-  gap: 2em;
-  color: white;
+  padding: 1em;
+  gap: 1em;
+  color: #020417;
   border-radius: 1em;
-}
-article p {
-  font-weight: 200;
+  text-align: center;
 }
 article button {
   border: none;
-  width: 33%;
+  color: #f6f7fe;
+  width: 5em;
+  height: 2.5em;
   font-size: inherit;
-  background-color: #d697c1;
+  background-color: #2529ed;
   border-radius: 0.5em;
-  font-weight: 800;
+  opacity: 90%;
+  transition: background-color 400ms;
+}
+article button:hover {
+  cursor: pointer;
+  background-color: #f06e43;
 }
 article input {
   font-size: inherit;
+}
+article #result .input {
+  color: #f06e43;
 }
 
 /*# sourceMappingURL=styles.css.map */
