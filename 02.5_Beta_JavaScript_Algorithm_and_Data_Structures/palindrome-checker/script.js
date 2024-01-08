@@ -3,20 +3,13 @@ inputField.addEventListener("input", () => { document.querySelector("#result").i
 inputField.addEventListener("keydown", (event) => {
   if (event.key == "Enter") palindrome();
 });
+
 function palindrome() {
-  const str = document.querySelector("#text-input").value;
+  const userInput = document.querySelector("#text-input").value;
   const output = document.querySelector("#result");
-  if (isEmpty(str)) alert("Please input a value");
+  if (isEmpty(userInput)) alert("Please input a value");
   // debugger;
-  const letterRegex = /[a-z0-9]/gi;
-  // const nonLetterRegex = /[^\w .]/gi;
-  const lettersFromString = str.match(letterRegex);
-
-  // const textFromInput = str.replace(nonLetterRegex, "");
-  const textFromInput = str;
-
-  const lowercaseLetters =
-    lettersFromString.map(letter => letter.toLowerCase());
+  const lowercaseLetters = toLowerCase(userInput);
 
   const stringLength = lowercaseLetters.length;
 
@@ -34,10 +27,19 @@ function palindrome() {
   }
 
   // debugger;
-  output.innerHTML = `<span class="input">${textFromInput}</span><br /> is ${(isPalindrome) ? "" : "not"} a palindrome.`;
+  output.innerHTML = `<span class="input">${userInput}</span><br /> is ${(isPalindrome) ? "" : "not"} a palindrome.`;
+
+  function toLowerCase(userInput) {
+    const letterRegex = /[a-z0-9]/gi;
+    const lettersFromString = userInput.match(letterRegex);
+
+    const lowercaseLetters = lettersFromString.map(letter => letter.toLowerCase());
+    return lowercaseLetters;
+  }
+
+  function isEmpty(str) {
+    if (str.length == 0) return true;
+    else return false;
+  }
 }
 
-function isEmpty(str) {
-  if (str.length == 0) return true;
-  else return false;
-}
