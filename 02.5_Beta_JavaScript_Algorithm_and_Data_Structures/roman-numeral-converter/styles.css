@@ -1,3 +1,72 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #f9fafa;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: flex;
+  color: #050607;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  padding: 1rem;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  font-style: italic;
+  color: #afae9b;
+}
+
+hr {
+  margin: 1rem auto 1rem;
+  width: 50%;
+}
+
+article {
+  background-color: #ECE9EB;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  gap: 1em;
+  color: #050607;
+  border-radius: 1em;
+  text-align: center;
+}
+article button {
+  border: none;
+  color: #f9fafa;
+  width: 5em;
+  height: 2.5em;
+  font-size: inherit;
+  background-color: #758891;
+  border-radius: 0.5em;
+  opacity: 90%;
+  transition: background-color 400ms;
+}
+article button:hover {
+  cursor: pointer;
+  background-color: #afae9b;
+}
+article input {
+  font-size: inherit;
+}
+article #result .input {
+  color: #afae9b;
+}
 
 /*# sourceMappingURL=styles.css.map */

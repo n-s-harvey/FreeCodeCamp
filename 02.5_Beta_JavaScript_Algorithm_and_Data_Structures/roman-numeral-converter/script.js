@@ -52,10 +52,9 @@ function convert() {
   let output = document.getElementById("output");
 
   const result = checkInput(userInput);
-  if (result != "valid") output.innerText = result;
-
+  if (result != "valid") output.innerHTML = `<span class="animate__animated animate__flash animate__slow">${result}</span>`;
   else {
-    output.innerText = convertToRoman(userInput);
+    output.innerHTML = `<span class="animate__animated animate__fadeIn">${convertToRoman(userInput)}</span>`;
   }
 
 }
