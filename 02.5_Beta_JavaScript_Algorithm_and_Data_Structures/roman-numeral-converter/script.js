@@ -1,26 +1,3 @@
-/*
-Roman Numeral Converter
-
-Convert the given number into a roman numeral.
-Roman numerals 	Arabic numerals
-M 	1000
-CM 	900
-D 	500
-CD 	400
-C 	100
-XC 	90
-L 	50
-XL 	40
-X 	10
-IX 	9
-V 	5
-IV 	4
-I 	1
-
-All roman numerals answers should be provided in upper-case.
-
- */
-
 class RomanNumerals {
   static #definedNumerals = new Map([
 
@@ -63,15 +40,58 @@ class RomanNumerals {
 
 }
 
-let number = document.getElementById("text-input").value;
+const inputField = document.getElementById("number");
+inputField.addEventListener("input", () => { document.getElementById("output").innerText = "" });
+inputField.addEventListener("keydown", (event) => {
+  if (event.key == "Enter") convert();
+});
+
+function convert() {
+
+  let userInput = parseInt(document.getElementById("number").value);
+  let output = document.getElementById("output");
+
+  const result = checkInput(userInput);
+  if (result != "valid") output.innerText = result;
+
+  else {
+    output.innerText = convertToRoman(userInput);
+  }
+
+}
+
+/**
+ * @param {number | string} input 
+ * @returns {string}
+ * */
+function checkInput(input) {
+  debugger;
+  if (typeof input !== "number") {
+    debugger;
+    return "Please enter a valid number";
+  }
+
+  if (input < 1) {
+    return "Please enter a number greater than or equal to 1";
+  }
+
+  if (input > 3999) {
+    return "Please enter a number less than or equal to 3999";
+  }
+
+  return "valid";
+}
+
 /**
   * @description Main entry point for conversion.
+  * @param {number} [number=userInput] 
   */
 function convertToRoman(number) {
 
+  debugger;
 
-  // TODO strength & test base case
   if (number == 0) return "";
+
 
   else {
 
@@ -129,6 +149,6 @@ function convertToRoman(number) {
 
 
 // convertToRoman(36);
-console.log(convertToRoman(1));
+// convertToRoman(1);
 // TODO this test fails
 // convertToRoman(12);
