@@ -9,25 +9,27 @@ html {
 }
 
 body {
-  background-color: #f9fafa;
+  background-image: linear-gradient(#758891, #c1b2b2);
   background-repeat: no-repeat;
   background-size: 100%;
-  display: flex;
   color: #050607;
   font-size: 2rem;
-  display: flex;
-  flex-direction: column;
   align-content: center;
   justify-content: center;
-  font-family: "Poppins", sans-serif;
   padding: 1rem;
   height: 100vh;
+  font-family: "Lato", sans-serif;
 }
 
 h1 {
   text-align: center;
-  font-style: italic;
-  color: #afae9b;
+  color: #050607;
+  font-family: "Cinzel", serif;
+}
+
+nav {
+  position: sticky;
+  top: 0;
 }
 
 hr {
@@ -37,15 +39,18 @@ hr {
 
 article {
   background-color: #ECE9EB;
+  background-color: rgba(236, 233, 235, 0.4);
   margin: 1rem auto;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   padding: 1em;
-  gap: 1em;
   color: #050607;
   border-radius: 1em;
   text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  transition: max-height 1s;
 }
 article button {
   border: none;
@@ -64,9 +69,13 @@ article button:hover {
 }
 article input {
   font-size: inherit;
+  text-align: center;
 }
 article #result .input {
   color: #afae9b;
+}
+article article.expanded {
+  max-height: min-content;
 }
 
 /*# sourceMappingURL=styles.css.map */
