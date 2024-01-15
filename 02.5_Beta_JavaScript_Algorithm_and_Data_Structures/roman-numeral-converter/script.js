@@ -1,69 +1,27 @@
-class RomanNumerals {
-  static #definedNumerals = new Map([
-
-    [1, "I"],
-    [4, "IV"],
-    [5, "V"],
-    [9, "IX"],
-    [10, "X"],
-    [40, "XL"],
-    [50, "L"],
-    [90, "XC"],
-    [100, "C"],
-    [400, "CD"],
-    [500, "D"],
-    [900, "CM"],
-    [1000, "M"]
-
-  ]);
-
-  static #countingNumerals = new Map([
-
-    [1, "I"],
-    [10, "X"],
-    [100, "C"],
-    [1000, "M"],
-
-  ]);
-
-  static get(string) {
-    if (this.#definedNumerals.has(string)) {
-      return this.#definedNumerals.get(string);
-    }
-    else return undefined;
-  }
-
-  static getCountingNumeral(number) {
-    return this.#countingNumerals.get(number);
-  }
-
-
-}
+import RomanNumerals from "./numerals.js";
+// import convertToRoman from "./converter.js";
 
 let article = document.querySelector('article');
-const minHeight = article.offsetHeight;
 
 const inputField = document.getElementById("number");
 inputField.addEventListener("input", () => {
   document.getElementById("output").innerHTML = "";
   // article.style.height = "auto";
-  updatedRedraw();
+  redrawArticle();
 });
 inputField.addEventListener("keydown", (event) => {
   if (event.key == "Enter") {
     convert();
 
-    updatedRedraw();
+    redrawArticle();
   }
 });
 
-function updatedRedraw() {
-  debugger;
+function redrawArticle() {
+  // debugger;
   const article = document.querySelector('article');
-  const output = document.getElementById("output");
   const wrapper = document.querySelector("section");
-  // const margin = 0;
-  // const padding = 0;
+
   if (output.innerText == "") {
     article.classList.remove("expanded");
     article.style.height = `${wrapper.scrollHeight}px`;
@@ -73,7 +31,9 @@ function updatedRedraw() {
     article.style.height = `${wrapper.scrollHeight}px`;
   }
 }
-
+/**
+ * @description Main entry point for conversion
+ */
 function convert() {
 
   // debugger;
@@ -91,13 +51,13 @@ function convert() {
     output.innerHTML = `<span class="animate__animated animate__fadeIn">${convertToRoman(userInput)}</span>`;
   }
 
-  updatedRedraw();
+  redrawArticle();
 }
 
-
+window.convert = convert;
 
 /**
- * @param {number | string} input 
+ * @param {number | string} input
  * @returns {string}
  * */
 function checkInput(input) {
@@ -120,7 +80,7 @@ function checkInput(input) {
 
 /**
   * @description Main entry point for conversion.
-  * @param {number} [number=userInput] 
+  * @param {number}
   */
 function convertToRoman(number) {
 
@@ -158,7 +118,6 @@ function convertToRoman(number) {
 
       }
 
-      // need to get midpoint and increment
       else if (digitValue > 5) {
         // pull 5 * power of place
         midpointNumeral = RomanNumerals.get(
@@ -175,7 +134,6 @@ function convertToRoman(number) {
 
     }
 
-    // TODO make this recursive by subtracting isolate
     return numeral + convertToRoman(number - isolate);
 
   }
