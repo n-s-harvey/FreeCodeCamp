@@ -40,33 +40,70 @@ class RomanNumerals {
 
 }
 
+let article = document.querySelector('article');
+const minHeight = article.offsetHeight;
+
 const inputField = document.getElementById("number");
-inputField.addEventListener("input", () => { document.getElementById("output").innerText = "" });
-inputField.addEventListener("keydown", (event) => {
-  if (event.key == "Enter") convert();
+inputField.addEventListener("input", () => {
+  document.getElementById("output").innerHTML = "";
+  // article.style.height = "auto";
+  updatedRedraw();
 });
+inputField.addEventListener("keydown", (event) => {
+  if (event.key == "Enter") {
+    convert();
+
+    updatedRedraw();
+  }
+});
+
+function updatedRedraw() {
+  debugger;
+  const article = document.querySelector('article');
+  const output = document.getElementById("output");
+  const wrapper = document.querySelector("section");
+  // const margin = 0;
+  // const padding = 0;
+  if (output.innerText == "") {
+    article.classList.remove("expanded");
+    article.style.height = `${wrapper.scrollHeight}px`;
+  }
+  else {
+    article.classList.add("expanded");
+    article.style.height = `${wrapper.scrollHeight}px`;
+  }
+}
 
 function convert() {
 
+  // debugger;
   let userInput = parseInt(document.getElementById("number").value);
   let output = document.getElementById("output");
 
+
   const result = checkInput(userInput);
-  if (result != "valid") output.innerHTML = `<span class="animate__animated animate__flash animate__slow">${result}</span>`;
+  if (result != "valid") {
+    output.innerHTML = `<span class="animate__animated animate__flash animate__slow">${result}</span>`;
+    // article.classList.toggle("expanded");
+  }
+
   else {
     output.innerHTML = `<span class="animate__animated animate__fadeIn">${convertToRoman(userInput)}</span>`;
   }
 
+  updatedRedraw();
 }
+
+
 
 /**
  * @param {number | string} input 
  * @returns {string}
  * */
 function checkInput(input) {
-  debugger;
+  // debugger;
   if (typeof input !== "number") {
-    debugger;
+    // debugger;
     return "Please enter a valid number";
   }
 
@@ -78,7 +115,7 @@ function checkInput(input) {
     return "Please enter a number less than or equal to 3999";
   }
 
-  return "valid";
+  if (typeof input === "number") return "valid";
 }
 
 /**
@@ -87,7 +124,7 @@ function checkInput(input) {
   */
 function convertToRoman(number) {
 
-  debugger;
+  // debugger;
 
   if (number == 0) return "";
 
@@ -145,9 +182,3 @@ function convertToRoman(number) {
 
 
 }
-
-
-// convertToRoman(36);
-// convertToRoman(1);
-// TODO this test fails
-// convertToRoman(12);

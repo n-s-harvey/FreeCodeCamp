@@ -1,5 +1,4 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -16,7 +15,6 @@ body {
   font-size: 2rem;
   align-content: center;
   justify-content: center;
-  padding: 1rem;
   height: 100vh;
   font-family: "Lato", sans-serif;
 }
@@ -38,11 +36,12 @@ hr {
 }
 
 article {
+  overflow: hidden;
   background-color: #ECE9EB;
   background-color: rgba(236, 233, 235, 0.4);
   margin: 1rem auto;
-  align-items: center;
   padding: 1em;
+  align-items: center;
   color: #050607;
   border-radius: 1em;
   text-align: center;
@@ -50,7 +49,8 @@ article {
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  transition: max-height 1s;
+  height: auto;
+  transition: height 0.5s ease-in-out;
 }
 article button {
   border: none;
@@ -71,11 +71,8 @@ article input {
   font-size: inherit;
   text-align: center;
 }
-article #result .input {
+article #output .input {
   color: #afae9b;
-}
-article article.expanded {
-  max-height: min-content;
 }
 
 /*# sourceMappingURL=styles.css.map */
