@@ -20,7 +20,8 @@
 
       <p>Type the number you want to check: </p>
       <input type="text" id="number">
-      <button type="button" id="convert-btn" onclick="convert()">Check</button>
+      <button type="button" id="convert-btn" onclick="convert(document.getElementById('number').value,
+        document.getElementById('output'))">Check</button>
       <div id="output"></div>
     </section>
   </article>
