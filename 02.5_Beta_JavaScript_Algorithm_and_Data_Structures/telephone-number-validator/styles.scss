@@ -1,0 +1,101 @@
+$text: #050607;
+$background: #f9fafa;
+$primary: #758891;
+$secondary: #c1b2b2;
+$accent: #afae9b;
+$info-card: #ECE9EB;
+
+$info-background: rgba($info-card, 40%);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-image: linear-gradient($primary, $secondary);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color: $text;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 100vh;
+  font-family: 'Lato', sans-serif;
+}
+
+h1 {
+  margin-top: 10vh;
+  text-align: center;
+  color: $text;
+  font-family: 'Cinzel', serif;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  background-color: $info-background;
+  box-shadow: $info-background 0 0 2.5em 0.5em;
+}
+
+hr {
+  margin: 1rem auto 1rem;
+  width: 50%;
+}
+
+article {
+  overflow: hidden;
+  background-color: $info-card;
+  background-color: rgba($info-card, 40%);
+
+  margin: 1rem auto;
+  padding: 1em;
+  align-items: center;
+  color: $text;
+  border-radius: 1em;
+  text-align: center;
+
+  top: 50%;
+  left: 50%;
+  height: auto;
+  transition: height 0.5s ease-in-out;
+
+  button {
+    border: none;
+    display: block;
+    color: $background;
+    width: 5em;
+    height: 2.5em;
+    font-size: inherit;
+    background-color: $primary;
+    border-radius: 0.5em;
+    opacity: 90%;
+    transition: background-color 400ms;
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: $accent;
+  }
+
+  input {
+    font-size: inherit;
+    text-align: center;
+  }
+
+}
+
+section>* {
+  margin: 0.5em auto;
+}
+
+@media screen and (min-width: 1000px) {
+  hr {
+    width: 800px;
+  }
+}
