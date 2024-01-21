@@ -14,7 +14,15 @@ function check(userInput, outputElement) {
 
 
 }
+/**
+ * @param {Element} outputElement
+ */
+function clearOutput(outputElement) {
+  outputElement.innerHTML = "";
+}
+
 window.check = check;
+window.clearOutput = clearOutput;
 
 /**
  * @param {String} str 
