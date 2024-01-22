@@ -8,35 +8,76 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="styles.css" rel="stylesheet">
 </head>
 
 <body class="p-3">
-  <article class="card ">
+  <article class="card small m-auto">
     <h1 class="card-header text-center">Is it a Valid Number?</h1>
-    <section class="container card-body">
-      <div class="row">
-        <div class="col-8">
+    <section class="container card-body ">
+      <div class="row align-items-end mb-3">
+        <div class="col-auto w-auto">
           <label for="user-input" class="card-text ">Type the phone number you'd like to check: </label>
-          <input type="text" id="user-input" class="form-control form-text   col-8"
-            placeholder="Type a phone number here...">
+          <input type="text" id="user-input" class="form-control form-text" placeholder="Type a phone number here...">
         </div>
-        <div class="col-4">
-          <button type="button" id="check-btn" class="btn btn-primary" onclick="check(document.getElementById('user-input').value,
-            document.getElementById('results-div'))">Validate</button>
-        </div>
-      </div>
-      Phone numbers you input will appear here...
-      <div class="card">
-        <div class="card-subtitle">
-        </div>
-        <div id="results-div" class="card-body container w-75">
+        <div class="col-auto">
+          <div>
+            <button type="button" id="check-btn" class="btn btn-primary" onclick="check(document.getElementById('user-input').value,
+                document.getElementById('results-div'))">Validate</button>
+          </div>
         </div>
       </div>
-      <button type=" button" id="clear-btn" class="btn btn-secondary block"
-        onclick="clearOutput(document.getElementById('results-div'))">Clear Results</button>
+
+      <div class="row row-gap-3 mb-3">
+        <div>
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            More information...
+          </button>
+        </div>
+      </div>
+      <!-- <div class="row mb-3"> -->
+      <!--   <p> -->
+      <!--     Phone numbers you input will appear here... -->
+      <!--   </p> -->
+      <!-- </div> -->
+      <div class="row mb-3 mw-50">
+        <div class="col">
+          <div class="card p-3">
+            <div class="card-subtitle">
+              Phone numbers you input will appear here:
+            </div>
+            <div id="results-div" class="card-body container ">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div>
+          <button type=" button" id="clear-btn" class="btn btn-secondary block"
+            onclick="clearOutput(document.getElementById('results-div'))">Clear Results</button>
+        </div>
+      </div>
     </section>
   </article>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>

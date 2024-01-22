@@ -1,3 +1,5 @@
+
+
 /**
  * @description Main entry point for checking telephone number.
  * @param {String} userInput
@@ -10,7 +12,10 @@ function check(userInput, outputElement) {
   };
 
   outputElement.innerHTML += `
-  ${telephoneCheck(userInput) ? "Valid US number: " : "Invalid US number: "}${userInput}<br />`;
+  ${telephoneCheck(userInput)
+      ? "<span class='text-success'><i class='bi bi-check-circle-fill'></i> Valid US number: "
+      : "<span class='text-danger'><i class='bi bi-x-circle-fill'></i> Invalid US number: "
+    }${userInput}</span > <br />`;
 
 
 }
