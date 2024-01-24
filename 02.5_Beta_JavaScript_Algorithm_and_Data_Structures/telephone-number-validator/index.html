@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
   <meta charset="utf-8">
@@ -14,7 +14,7 @@
 
 <body class="p-3">
   <article class="card small m-auto">
-    <h1 class="card-header text-center">Is it a Valid Number?</h1>
+    <h1 class="card-header text-center">Is it a Valid Phone&nbsp;Number?</h1>
     <section class="container card-body ">
       <div class="row align-items-end mb-3">
         <div class="col-auto w-auto">
@@ -27,15 +27,16 @@
                 document.getElementById('results-div'))">Validate</button>
           </div>
         </div>
-      </div>
-
-      <div class="row row-gap-3 mb-3">
-        <div>
-          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            More information...
-          </button>
+        <div class="col-auto">
+          <div>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="bi bi-question-circle"></i>
+            </button>
+          </div>
         </div>
       </div>
+      </div>
+
       <!-- <div class="row mb-3"> -->
       <!--   <p> -->
       <!--     Phone numbers you input will appear here... -->
@@ -44,10 +45,10 @@
       <div class="row mb-3 mw-50">
         <div class="col">
           <div class="card p-3">
-            <div class="card-subtitle">
-              Phone numbers you input will appear here:
-            </div>
-            <div id="results-div" class="card-body container ">
+            <div id="results-div" class="card-body container empty">
+              <span class="text-secondary">
+                Phone numbers you input will appear here.
+              </span>
             </div>
           </div>
         </div>

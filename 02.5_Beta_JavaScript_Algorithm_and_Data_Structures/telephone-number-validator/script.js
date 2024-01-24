@@ -1,4 +1,11 @@
-
+const inputField = document.getElementById("user-input");
+inputField.addEventListener("keydown", (event) => {
+  if (event.key == "Enter") {
+    check(
+      document.getElementById('user-input').value,
+      document.getElementById('results-div'))
+  }
+});
 
 /**
  * @description Main entry point for checking telephone number.
@@ -11,19 +18,30 @@ function check(userInput, outputElement) {
     return;
   };
 
+  if (outputElement.classList.contains("empty")) {
+    outputElement.innerHTML = '';
+  }
+
   outputElement.innerHTML += `
   ${telephoneCheck(userInput)
       ? "<span class='text-success'><i class='bi bi-check-circle-fill'></i> Valid US number: "
       : "<span class='text-danger'><i class='bi bi-x-circle-fill'></i> Invalid US number: "
     }${userInput}</span > <br />`;
 
+  outputElement.classList.remove("empty");
 
 }
 /**
  * @param {Element} outputElement
  */
 function clearOutput(outputElement) {
-  outputElement.innerHTML = "";
+  outputElement.innerHTML =
+    `
+    <span class="text-secondary">
+      Phone numbers you input will appear here.
+    </span>
+    `;
+  outputElement.classList.add("empty");
 }
 
 window.check = check;
