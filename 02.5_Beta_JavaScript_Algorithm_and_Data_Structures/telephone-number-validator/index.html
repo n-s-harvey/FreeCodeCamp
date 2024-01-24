@@ -17,7 +17,7 @@
     <h1 class="card-header text-center">Is it a Valid Phone&nbsp;Number?</h1>
     <section class="container card-body ">
       <div class="row align-items-end mb-3">
-        <div class="col-auto w-auto">
+        <div class="col-auto">
           <label for="user-input" class="card-text ">Type the phone number you'd like to check: </label>
           <input type="text" id="user-input" class="form-control form-text" placeholder="Type a phone number here...">
         </div>
@@ -66,15 +66,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">How This Tool Works</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+          <p>Input a number you'd like to check is a valid U.S. phone number. A valid U.S. phone number has a 3-digit
+            area code: XXX-XXX-XXXX</p>
+          <p>You may optionally enter a country code before the phone number. The U.S. country code is 1: 1-XXX-XXX-XXXX
+          </p>
+          <p>Please note that this tool does not validate if the phone number is an active phone number but instead
+            confirms the format of the phone number.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
